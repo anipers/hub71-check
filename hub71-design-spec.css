@@ -1,0 +1,538 @@
+/* ============================================
+   Hub71 Design System - CSS Specification
+   ============================================
+   
+   Based on Hub71 website design analysis:
+   - Dark theme with black/very dark backgrounds
+   - Primary accent: bright neon green/lime (#BFFF00)
+   - Clean, minimalist, professional tech startup aesthetic
+   - Large bold headlines, white text on dark
+   - Cards with subtle borders, lots of whitespace
+   - Modern geometric sans-serif typography
+   - Subtle gradients and clean iconography
+   ============================================ */
+
+/* ============================================
+   1. COLOR PALETTE
+   ============================================ */
+
+:root {
+  /* Primary Brand Colors */
+  --hub71-primary: #BFFF00;              /* Bright neon green/lime - signature color */
+  --hub71-primary-dark: #9FCC00;         /* Darker variant for hover states */
+  --hub71-primary-light: #D9FF4D;        /* Lighter variant for subtle accents */
+  --hub71-primary-glow: rgba(191, 255, 0, 0.3);  /* Glow effect */
+  
+  /* Background Colors */
+  --hub71-bg-primary: #000000;           /* Pure black primary background */
+  --hub71-bg-secondary: #0A0A0A;          /* Very dark gray - secondary backgrounds */
+  --hub71-bg-tertiary: #141414;          /* Slightly lighter - card backgrounds */
+  --hub71-bg-elevated: #1A1A1A;          /* Elevated surfaces (modals, dropdowns) */
+  
+  /* Text Colors */
+  --hub71-text-primary: #FFFFFF;          /* Primary white text */
+  --hub71-text-secondary: #CCCCCC;        /* Secondary gray text */
+  --hub71-text-tertiary: #999999;        /* Tertiary muted text */
+  --hub71-text-muted: #666666;           /* Very muted text for hints */
+  
+  /* Border Colors */
+  --hub71-border-primary: rgba(255, 255, 255, 0.1);    /* Subtle white borders */
+  --hub71-border-secondary: rgba(255, 255, 255, 0.05);  /* Very subtle borders */
+  --hub71-border-accent: rgba(191, 255, 0, 0.2);        /* Accent borders */
+  --hub71-border-hover: rgba(191, 255, 0, 0.4);         /* Hover state borders */
+  
+  /* Semantic Colors (for status, alerts, etc.) */
+  --hub71-success: #00FF88;               /* Success green */
+  --hub71-warning: #FFB800;               /* Warning amber */
+  --hub71-error: #FF4444;                 /* Error red */
+  --hub71-info: #00B8FF;                  /* Info blue */
+  
+  /* Overlay & Glass Effects */
+  --hub71-overlay: rgba(0, 0, 0, 0.8);   /* Dark overlay for modals */
+  --hub71-glass: rgba(255, 255, 255, 0.03); /* Glass morphism background */
+  --hub71-glass-border: rgba(255, 255, 255, 0.1); /* Glass border */
+  
+  /* Gradients */
+  --hub71-gradient-primary: linear-gradient(135deg, #BFFF00 0%, #9FCC00 100%);
+  --hub71-gradient-dark: linear-gradient(135deg, #0A0A0A 0%, #000000 100%);
+  --hub71-gradient-subtle: linear-gradient(180deg, rgba(191, 255, 0, 0.1) 0%, transparent 100%);
+  --hub71-gradient-accent: linear-gradient(135deg, rgba(191, 255, 0, 0.2) 0%, rgba(191, 255, 0, 0.05) 100%);
+}
+
+/* ============================================
+   2. TYPOGRAPHY
+   ============================================ */
+
+/* Import Google Fonts - Geometric Sans-Serif */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Font Families */
+  --hub71-font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --hub71-font-heading: 'Space Grotesk', 'Inter', sans-serif; /* Geometric sans-serif for headings */
+  
+  /* Font Sizes - Fluid Typography Scale */
+  --hub71-text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);      /* 12-14px */
+  --hub71-text-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);        /* 14-16px */
+  --hub71-text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);        /* 16-18px */
+  --hub71-text-lg: clamp(1.125rem, 1rem + 0.625vw, 1.5rem);         /* 18-24px */
+  --hub71-text-xl: clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem);       /* 24-36px */
+  --hub71-text-2xl: clamp(2rem, 1.5rem + 2.5vw, 3.5rem);            /* 32-56px */
+  --hub71-text-3xl: clamp(2.5rem, 1.75rem + 3.75vw, 5rem);          /* 40-80px */
+  --hub71-text-4xl: clamp(3rem, 2rem + 5vw, 6.5rem);                /* 48-104px */
+  
+  /* Font Weights */
+  --hub71-weight-light: 300;
+  --hub71-weight-regular: 400;
+  --hub71-weight-medium: 500;
+  --hub71-weight-semibold: 600;
+  --hub71-weight-bold: 700;
+  --hub71-weight-extrabold: 800;
+  --hub71-weight-black: 900;
+  
+  /* Line Heights */
+  --hub71-leading-tight: 1.2;
+  --hub71-leading-normal: 1.5;
+  --hub71-leading-relaxed: 1.75;
+  --hub71-leading-loose: 2;
+  
+  /* Letter Spacing */
+  --hub71-tracking-tight: -0.02em;
+  --hub71-tracking-normal: 0;
+  --hub71-tracking-wide: 0.05em;
+  --hub71-tracking-wider: 0.1em;
+}
+
+/* Base Typography */
+body {
+  font-family: var(--hub71-font-primary);
+  font-size: var(--hub71-text-base);
+  font-weight: var(--hub71-weight-regular);
+  line-height: var(--hub71-leading-normal);
+  color: var(--hub71-text-primary);
+  background-color: var(--hub71-bg-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--hub71-font-heading);
+  font-weight: var(--hub71-weight-bold);
+  line-height: var(--hub71-leading-tight);
+  letter-spacing: var(--hub71-tracking-tight);
+  color: var(--hub71-text-primary);
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--hub71-text-4xl);
+  font-weight: var(--hub71-weight-extrabold);
+}
+
+h2 {
+  font-size: var(--hub71-text-3xl);
+  font-weight: var(--hub71-weight-bold);
+}
+
+h3 {
+  font-size: var(--hub71-text-2xl);
+  font-weight: var(--hub71-weight-bold);
+}
+
+h4 {
+  font-size: var(--hub71-text-xl);
+  font-weight: var(--hub71-weight-semibold);
+}
+
+h5 {
+  font-size: var(--hub71-text-lg);
+  font-weight: var(--hub71-weight-semibold);
+}
+
+h6 {
+  font-size: var(--hub71-text-base);
+  font-weight: var(--hub71-weight-semibold);
+}
+
+/* Text Variants */
+.text-primary { color: var(--hub71-text-primary); }
+.text-secondary { color: var(--hub71-text-secondary); }
+.text-tertiary { color: var(--hub71-text-tertiary); }
+.text-muted { color: var(--hub71-text-muted); }
+.text-accent { color: var(--hub71-primary); }
+
+/* ============================================
+   3. SPACING SYSTEM
+   ============================================ */
+
+:root {
+  /* Base spacing unit: 4px */
+  --hub71-space-1: 0.25rem;   /* 4px */
+  --hub71-space-2: 0.5rem;    /* 8px */
+  --hub71-space-3: 0.75rem;   /* 12px */
+  --hub71-space-4: 1rem;      /* 16px */
+  --hub71-space-5: 1.25rem;   /* 20px */
+  --hub71-space-6: 1.5rem;    /* 24px */
+  --hub71-space-8: 2rem;      /* 32px */
+  --hub71-space-10: 2.5rem;   /* 40px */
+  --hub71-space-12: 3rem;     /* 48px */
+  --hub71-space-16: 4rem;     /* 64px */
+  --hub71-space-20: 5rem;     /* 80px */
+  --hub71-space-24: 6rem;     /* 96px */
+  --hub71-space-32: 8rem;     /* 128px */
+  
+  /* Section Spacing */
+  --hub71-section-padding: clamp(3rem, 5vw, 6rem);
+  --hub71-container-padding: clamp(1rem, 4vw, 2rem);
+}
+
+/* ============================================
+   4. CARD STYLES
+   ============================================ */
+
+.card {
+  background: var(--hub71-bg-tertiary);
+  border: 1px solid var(--hub71-border-primary);
+  border-radius: 1rem;
+  padding: var(--hub71-space-6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card:hover {
+  background: var(--hub71-bg-elevated);
+  border-color: var(--hub71-border-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+              0 0 0 1px var(--hub71-border-hover);
+}
+
+.card-elevated {
+  background: var(--hub71-bg-elevated);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+.card-glass {
+  background: var(--hub71-glass);
+  border: 1px solid var(--hub71-glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.card-accent {
+  border-color: var(--hub71-border-accent);
+  background: var(--hub71-gradient-accent);
+}
+
+/* ============================================
+   5. BUTTON STYLES
+   ============================================ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--hub71-space-4) var(--hub71-space-8);
+  font-family: var(--hub71-font-heading);
+  font-size: var(--hub71-text-base);
+  font-weight: var(--hub71-weight-semibold);
+  line-height: 1;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  letter-spacing: var(--hub71-tracking-wide);
+  text-transform: uppercase;
+  font-size: var(--hub71-text-sm);
+}
+
+.btn-primary {
+  background: var(--hub71-gradient-primary);
+  color: var(--hub71-bg-primary);
+  box-shadow: 0 4px 16px var(--hub71-primary-glow);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px var(--hub71-primary-glow),
+              0 0 0 1px var(--hub71-primary);
+  background: linear-gradient(135deg, var(--hub71-primary-light) 0%, var(--hub71-primary) 100%);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--hub71-text-primary);
+  border: 1px solid var(--hub71-border-primary);
+}
+
+.btn-secondary:hover {
+  background: var(--hub71-bg-tertiary);
+  border-color: var(--hub71-border-accent);
+  color: var(--hub71-primary);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--hub71-primary);
+  border: 2px solid var(--hub71-primary);
+}
+
+.btn-outline:hover {
+  background: var(--hub71-primary);
+  color: var(--hub71-bg-primary);
+  box-shadow: 0 4px 16px var(--hub71-primary-glow);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--hub71-text-secondary);
+  border: none;
+}
+
+.btn-ghost:hover {
+  color: var(--hub71-primary);
+  background: var(--hub71-bg-tertiary);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================
+   6. GRADIENTS & EFFECTS
+   ============================================ */
+
+.gradient-primary {
+  background: var(--hub71-gradient-primary);
+}
+
+.gradient-dark {
+  background: var(--hub71-gradient-dark);
+}
+
+.gradient-subtle {
+  background: var(--hub71-gradient-subtle);
+}
+
+.gradient-accent {
+  background: var(--hub71-gradient-accent);
+}
+
+/* Glow Effects */
+.glow-primary {
+  box-shadow: 0 0 20px var(--hub71-primary-glow);
+}
+
+.glow-accent {
+  box-shadow: 0 0 30px rgba(191, 255, 0, 0.5);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px var(--hub71-primary-glow);
+}
+
+/* Hover Glow */
+.hover-glow:hover {
+  box-shadow: 0 0 30px var(--hub71-primary-glow);
+}
+
+/* ============================================
+   7. BORDERS & DIVIDERS
+   ============================================ */
+
+.border-primary {
+  border: 1px solid var(--hub71-border-primary);
+}
+
+.border-secondary {
+  border: 1px solid var(--hub71-border-secondary);
+}
+
+.border-accent {
+  border: 1px solid var(--hub71-border-accent);
+}
+
+.divider {
+  height: 1px;
+  background: var(--hub71-border-primary);
+  border: none;
+  margin: var(--hub71-space-8) 0;
+}
+
+.divider-accent {
+  height: 2px;
+  background: var(--hub71-gradient-primary);
+  border: none;
+  margin: var(--hub71-space-8) 0;
+}
+
+/* ============================================
+   8. UTILITY CLASSES
+   ============================================ */
+
+/* Backgrounds */
+.bg-primary { background-color: var(--hub71-bg-primary); }
+.bg-secondary { background-color: var(--hub71-bg-secondary); }
+.bg-tertiary { background-color: var(--hub71-bg-tertiary); }
+.bg-elevated { background-color: var(--hub71-bg-elevated); }
+
+/* Spacing Utilities */
+.p-0 { padding: 0; }
+.p-1 { padding: var(--hub71-space-1); }
+.p-2 { padding: var(--hub71-space-2); }
+.p-4 { padding: var(--hub71-space-4); }
+.p-6 { padding: var(--hub71-space-6); }
+.p-8 { padding: var(--hub71-space-8); }
+
+.m-0 { margin: 0; }
+.m-1 { margin: var(--hub71-space-1); }
+.m-2 { margin: var(--hub71-space-2); }
+.m-4 { margin: var(--hub71-space-4); }
+.m-6 { margin: var(--hub71-space-6); }
+.m-8 { margin: var(--hub71-space-8); }
+
+/* Display & Layout */
+.flex { display: flex; }
+.grid { display: grid; }
+.hidden { display: none; }
+
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+.gap-2 { gap: var(--hub71-space-2); }
+.gap-4 { gap: var(--hub71-space-4); }
+.gap-6 { gap: var(--hub71-space-6); }
+.gap-8 { gap: var(--hub71-space-8); }
+
+/* Border Radius */
+.rounded { border-radius: 0.5rem; }
+.rounded-lg { border-radius: 1rem; }
+.rounded-xl { border-radius: 1.5rem; }
+.rounded-full { border-radius: 9999px; }
+
+/* Transitions */
+.transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+.transition-fast { transition: all 0.15s ease; }
+.transition-slow { transition: all 0.5s ease; }
+
+/* ============================================
+   9. RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+:root {
+  --hub71-breakpoint-sm: 640px;
+  --hub71-breakpoint-md: 768px;
+  --hub71-breakpoint-lg: 1024px;
+  --hub71-breakpoint-xl: 1280px;
+  --hub71-breakpoint-2xl: 1536px;
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: var(--hub71-space-8);
+  }
+}
+
+@media (min-width: 1024px) {
+  h1 {
+    font-size: var(--hub71-text-4xl);
+  }
+  
+  .card {
+    padding: var(--hub71-space-10);
+  }
+}
+
+/* ============================================
+   10. ANIMATIONS
+   ============================================ */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--hub71-primary-glow);
+  }
+  50% {
+    box-shadow: 0 0 40px var(--hub71-primary-glow);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+.animate-slideIn {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite;
+}
+
+/* ============================================
+   11. FOCUS STATES (Accessibility)
+   ============================================ */
+
+*:focus-visible {
+  outline: 2px solid var(--hub71-primary);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--hub71-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   12. SCROLLBAR STYLING
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--hub71-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--hub71-bg-tertiary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hub71-primary);
+}
