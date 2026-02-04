@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hub71 Readiness Self-Check</title>
+  <title>Abu Dhabi Startup Readiness Check</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
       --blue: #124ef5; --blue-dark: #0026ab; --blue-light: #4bace9;
       --white: #FFFFFF; --gray-bg: #f5f7fa; --gray-light: #eff1f5; --gray: #6b7280; --gray-dark: #374151;
       --black: #1a1a1a;
-      --green: #22c55e; --green-bg: #dcfce7; --yellow: #f59e0b; --yellow-bg: #fef3c7; --red: #ef4444; --red-bg: #fee2e2;
+      --green: #22c55e; --yellow: #f59e0b; --red: #ef4444;
       --border: #e5e7eb;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -29,58 +29,83 @@
     .step { animation: fadeIn .4s ease-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     
-    /* Header */
-    .header { text-align: center; margin-bottom: 3rem; padding: 2rem 0; background: var(--gray-bg); margin: -2rem -2rem 2rem -2rem; padding: 3rem 2rem; }
+    /* Header с графическими элементами */
+    .header {
+      text-align: center; margin: -2rem -2rem 2rem -2rem; padding: 3rem 2rem;
+      background: linear-gradient(135deg, var(--gray-bg) 0%, var(--white) 50%, var(--gray-bg) 100%);
+      position: relative; overflow: hidden;
+    }
+    .header::before {
+      content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(18,78,245,0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header::after {
+      content: ''; position: absolute; bottom: -30%; left: -5%; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(75,172,233,0.06) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .header h1, .header p { position: relative; z-index: 1; }
     .header h1 { color: var(--blue-dark); }
     .header p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: var(--gray-dark); }
-    .logo { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem; }
-    .logo-text { font-weight: 700; font-size: 1.5rem; color: var(--blue); }
-    .logo-badge { background: var(--blue); color: var(--white); padding: .25rem .75rem; font-size: .75rem; font-weight: 600; }
+    
+    /* Декоративные линии */
+    .deco-line { width: 60px; height: 4px; background: var(--blue); margin: 1.5rem auto; }
+    
+    /* Logo */
+    .logo { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem; position: relative; z-index: 1; }
+    .logo-icon { width: 40px; height: 40px; background: var(--blue); display: flex; align-items: center; justify-content: center; }
+    .logo-icon svg { width: 24px; height: 24px; fill: var(--white); }
+    .logo-text { font-weight: 700; font-size: 1.1rem; color: var(--blue-dark); }
+    .logo-badge { background: var(--blue); color: var(--white); padding: .25rem .75rem; font-size: .7rem; font-weight: 600; }
     
     /* Grid */
     .grid { display: grid; gap: 1.5rem; margin: 2rem 0; }
     @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 1024px) { .grid.v4 { grid-template-columns: repeat(4, 1fr); } }
     
-    /* Cards - КВАДРАТНЫЕ */
+    /* Cards */
     .card {
       background: var(--white); border: 1px solid var(--border);
-      padding: 1.5rem; transition: all .2s ease;
+      padding: 1.5rem; transition: all .2s ease; position: relative;
     }
-    .card:hover { border-color: var(--blue); box-shadow: 0 4px 12px rgba(18,78,245,0.1); }
+    .card::before {
+      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+      background: var(--blue); transform: scaleX(0); transition: transform .3s; transform-origin: left;
+    }
+    .card:hover::before { transform: scaleX(1); }
+    .card:hover { border-color: var(--blue-light); background: var(--gray-bg); }
     .card.clickable {
       cursor: pointer; text-align: center; min-height: 200px;
       display: flex; flex-direction: column; align-items: center; justify-content: center;
     }
-    .card.clickable:hover { background: var(--gray-bg); }
     .icon { font-size: 2.5rem; margin-bottom: 1rem; }
     .card-tag { display: inline-block; background: var(--blue); color: var(--white); padding: .25rem .75rem; font-size: .65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 1rem; }
     .card h3 { color: var(--blue-dark); }
     
-    /* Radio - КВАДРАТНЫЕ */
+    /* Radio - БЕЗ ЦВЕТНОЙ ПОДСВЕТКИ */
     .radio-group { display: flex; flex-direction: column; gap: .5rem; margin-top: 1rem; }
     .radio {
       display: flex; align-items: center; padding: 1rem 1.25rem;
       background: var(--white); border: 1px solid var(--border);
       cursor: pointer; transition: all .2s;
     }
-    .radio:hover { border-color: var(--blue-light); background: var(--gray-bg); }
+    .radio:hover { background: var(--gray-bg); border-color: var(--gray); }
     .radio input {
       appearance: none; width: 18px; height: 18px; border: 2px solid var(--border);
       margin-right: 1rem; flex-shrink: 0; transition: all .2s; position: relative;
     }
-    .radio input:checked { border-color: currentColor; background: currentColor; }
+    .radio input:checked { border-color: var(--blue); background: var(--blue); }
     .radio input:checked::after {
       content: '✓'; position: absolute; top: 50%; left: 50%;
       transform: translate(-50%, -50%); font-size: 12px; color: var(--white);
     }
     .radio span { color: var(--gray-dark); font-size: .95rem; }
-    .radio.g { color: var(--green); }
-    .radio.g:hover, .radio.g:has(input:checked) { border-color: var(--green); background: var(--green-bg); }
-    .radio.y { color: var(--yellow); }
-    .radio.y:hover, .radio.y:has(input:checked) { border-color: var(--yellow); background: var(--yellow-bg); }
-    .radio.r { color: var(--red); }
-    .radio.r:hover, .radio.r:has(input:checked) { border-color: var(--red); background: var(--red-bg); }
+    /* Только тонкая левая полоска для индикации типа ответа */
+    .radio.g { border-left: 3px solid var(--green); }
+    .radio.y { border-left: 3px solid var(--yellow); }
+    .radio.r { border-left: 3px solid var(--red); }
+    .radio:has(input:checked) { background: var(--gray-bg); border-color: var(--blue); }
     
     /* Progress */
     .progress-wrap { margin: 1.5rem 0; background: var(--gray-bg); padding: 1rem 1.5rem; }
@@ -88,7 +113,7 @@
     .progress { width: 100%; height: 8px; background: var(--border); }
     .progress-fill { height: 100%; background: var(--blue); transition: width .4s; }
     
-    /* Buttons - КВАДРАТНЫЕ */
+    /* Buttons */
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
       padding: 1rem 2rem; font-family: 'Poppins', sans-serif; font-size: .95rem; font-weight: 600;
@@ -112,16 +137,32 @@
     .donut-center span { display: block; font-size: 3rem; font-weight: 700; color: var(--blue-dark); }
     .donut-center small { color: var(--gray); font-size: .875rem; }
     
-    /* Result Card */
-    .result-card { background: var(--gray-bg); padding: 2rem; margin-bottom: 1.5rem; text-align: center; }
+    /* Result Card с графикой */
+    .result-card {
+      background: linear-gradient(135deg, var(--gray-bg) 0%, var(--white) 100%);
+      padding: 2rem; margin-bottom: 1.5rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .result-card::before {
+      content: ''; position: absolute; top: 0; right: 0; width: 150px; height: 150px;
+      background: radial-gradient(circle, rgba(18,78,245,0.05) 0%, transparent 70%);
+    }
+    
+    /* Score Legend */
+    .score-legend { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; }
+    .score-item { display: flex; align-items: center; gap: .5rem; font-size: .9rem; }
+    .score-dot { width: 12px; height: 12px; }
+    .score-dot.g { background: var(--green); }
+    .score-dot.y { background: var(--yellow); }
+    .score-dot.r { background: var(--red); }
     
     /* Action Items */
     .action { background: var(--white); border: 1px solid var(--border); padding: 1.25rem; margin-bottom: 1rem; }
     .action:hover { border-color: var(--blue-light); }
     .action h4 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; color: var(--blue-dark); }
     .priority { padding: .25rem .75rem; font-size: .7rem; font-weight: 600; text-transform: uppercase; }
-    .priority.high { background: var(--red-bg); color: var(--red); }
-    .priority.medium { background: var(--yellow-bg); color: var(--yellow); }
+    .priority.high { background: #fee2e2; color: var(--red); }
+    .priority.medium { background: #fef3c7; color: var(--yellow); }
     .action p { font-size: .9rem; margin-bottom: .25rem; color: var(--gray-dark); }
     .action strong { color: var(--black); }
     
@@ -130,9 +171,9 @@
     .story .company { font-weight: 700; font-size: 1.25rem; color: var(--blue); margin-bottom: .25rem; }
     .signals { display: flex; gap: .5rem; margin: 1rem 0; flex-wrap: wrap; }
     .signal { padding: .25rem .75rem; font-size: .8rem; font-weight: 500; }
-    .signal.g { background: var(--green-bg); color: var(--green); }
-    .signal.y { background: var(--yellow-bg); color: var(--yellow); }
-    .signal.r { background: var(--red-bg); color: var(--red); }
+    .signal.g { background: #dcfce7; color: var(--green); }
+    .signal.y { background: #fef3c7; color: var(--yellow); }
+    .signal.r { background: #fee2e2; color: var(--red); }
     .story ul { list-style: none; margin: 1rem 0; }
     .story li { padding: .25rem 0 .25rem 1.5rem; position: relative; color: var(--gray-dark); font-size: .9rem; }
     .story li::before { content: '✓'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
@@ -149,6 +190,9 @@
     .points.pos li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
     .points.neg li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
     
+    /* Footer */
+    .footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--gray); font-size: .85rem; }
+    
     /* Utilities */
     .flex { display: flex; } .flex-wrap { flex-wrap: wrap; } .gap { gap: 1rem; }
     .justify-center { justify-content: center; } .justify-between { justify-content: space-between; }
@@ -162,6 +206,7 @@
       .btn { width: 100%; }
       .donut { width: 150px; height: 150px; }
       .donut-center span { font-size: 2.5rem; }
+      .score-legend { gap: 1rem; }
     }
   </style>
 </head>
@@ -169,10 +214,10 @@
 <main id="app"></main>
 <script>
 const V = [
-  { id: 'fintech', name: 'Fintech / Web3', icon: '💳', desc: 'Payments, DeFi, Banking, Crypto', tag: 'Hub71+ Digital Assets' },
-  { id: 'ai', name: 'AI', icon: '🤖', desc: 'Machine Learning, LLMs, Computer Vision', tag: 'Hub71+ AI' },
-  { id: 'climate', name: 'ClimateTech', icon: '🌱', desc: 'Sustainability, Clean Energy, Carbon', tag: 'Hub71+ ClimateTech' },
-  { id: 'edtech', name: 'EdTech', icon: '📚', desc: 'Learning, Skills, Education Platforms', tag: 'Access Programme' }
+  { id: 'fintech', name: 'Fintech / Web3', icon: '💳', desc: 'Payments, DeFi, Banking, Crypto', tag: 'Digital Assets' },
+  { id: 'ai', name: 'AI', icon: '🤖', desc: 'Machine Learning, LLMs, Computer Vision', tag: 'Artificial Intelligence' },
+  { id: 'climate', name: 'ClimateTech', icon: '🌱', desc: 'Sustainability, Clean Energy, Carbon', tag: 'Climate Tech' },
+  { id: 'edtech', name: 'EdTech', icon: '📚', desc: 'Learning, Skills, Education Platforms', tag: 'Education' }
 ];
 
 const C = {
@@ -188,14 +233,14 @@ const C = {
     { id: 'aiteam', label: 'AI Team', g: 'ML lead with 3+ years', y: 'Junior ML engineer', r: 'No AI expertise' },
     { id: 'validation', label: 'Validation', g: 'Real pilots with partners', y: 'Lab tests only', r: 'No validation' },
     { id: 'modelmetrics', label: 'Model Metrics', g: 'Track accuracy, latency, cost', y: 'Track some', r: "Don't track" },
-    { id: 'abudhabiai', label: 'Abu Dhabi AI', g: 'Plan to use AI71/Core42', y: 'General interest', r: 'No specific plan' }
+    { id: 'abudhabiai', label: 'Abu Dhabi AI Ecosystem', g: 'Plan to use local AI resources', y: 'General interest', r: 'No specific plan' }
   ],
   climate: [
     { id: 'climatelogic', label: 'Climate Logic', g: 'Clear CO2/energy reduction path', y: 'General climate benefit', r: 'Unclear connection' },
     { id: 'impactmodel', label: 'Impact Model', g: 'Calculate CO2e/energy saved', y: 'Rough estimates', r: 'No calculations' },
     { id: 'pilotready', label: 'Pilot Ready', g: 'Ready for pilot now', y: 'Prototype stage', r: 'Not ready' },
     { id: 'localrelevance', label: 'Local Relevance', g: 'Ties to UAE Net Zero 2050', y: 'MENA relevant', r: 'No local angle' },
-    { id: 'partnerships', label: 'Partnerships', g: 'Talks with Tabreed/TAQA', y: 'Potential partners identified', r: 'No partners' }
+    { id: 'partnerships', label: 'Partnerships', g: 'Talks with local partners', y: 'Potential partners identified', r: 'No partners' }
   ],
   edtech: [
     { id: 'learningoutcome', label: 'Learning Outcome', g: 'Specific measurable outcome', y: 'General improvement', r: 'Unclear outcome' },
@@ -207,33 +252,33 @@ const C = {
 };
 
 const I = {
-  A: { emoji: '✅', title: 'High Readiness', sub: 'You look like a STRONG candidate for Hub71 Access/Specialist programs.',
+  A: { emoji: '✅', title: 'High Readiness', sub: 'You look like a STRONG candidate for Abu Dhabi accelerator programs.',
     pts: ['Clear product-market fit', 'Evidence of traction', 'Ready for Abu Dhabi expansion'],
     next: ["Apply now (don't wait for perfection)", 'Focus pitch on your strong signals', 'Explain Abu Dhabi as strategic choice'],
     time: 'Apply within 1 week' },
   B: { emoji: '🟡', title: 'Borderline', sub: 'You have a SOLID FOUNDATION but need to strengthen a few areas.',
-    pts: ['You understand what matters', 'Some risks, but manageable', 'Hub71 exists to help with gaps'],
+    pts: ['You understand what matters', 'Some risks, but manageable', 'Accelerators exist to help with gaps'],
     next: ['Strengthen your yellow/red signals (2-4 weeks)', 'Option A: Apply now, explain gaps', 'Option B: Improve for 3 weeks, then apply'],
     time: '2-4 weeks improvement → apply' },
-  C: { emoji: '🔴', title: 'Early Stage', sub: "Your profile doesn't match typical Hub71 Access candidates YET.",
+  C: { emoji: '🔴', title: 'Early Stage', sub: "Your profile doesn't match typical accelerator candidates YET.",
     pts: ['Too early stage OR', 'Missing validation OR', 'Unclear Abu Dhabi strategy'], neg: true,
-    next: ['Consider Hub71 Initiate (for earlier stage)', 'Month 1-2: Get live product + validation', 'Month 3: Build team + market clarity'],
+    next: ['Consider earlier-stage programs (Initiate)', 'Month 1-2: Get live product + validation', 'Month 3: Build team + market clarity'],
     time: '3-4 months → re-assess' }
 };
 
 const SS = {
   fintech: { company: 'QuickPay', desc: 'Expense Management SaaS', sig: { g: 6, y: 2, r: 0 },
     pts: ['$1.2M profit, not just idea', 'Clear ICP and market', '800% YoY growth'],
-    verdict: "Hub71 verdict: 'Strong candidate, help needed with Abu Dhabi partnerships'" },
+    verdict: "Verdict: 'Strong candidate, help needed with Abu Dhabi partnerships'" },
   ai: { company: 'VisionAI', desc: 'Computer vision platform for retail analytics', sig: { g: 5, y: 0, r: 0 },
-    pts: ['AI core to product value', 'ML team with 5+ years', 'Active pilots with 3 retailers', 'Planned AI71 integration'],
-    verdict: 'Fast-tracked to Hub71 AI program, secured enterprise partnerships' },
+    pts: ['AI core to product value', 'ML team with 5+ years', 'Active pilots with 3 retailers', 'Planned local AI integration'],
+    verdict: 'Fast-tracked to AI program, secured enterprise partnerships' },
   climate: { company: 'CarbonTrack', desc: 'Carbon accounting platform for UAE companies', sig: { g: 4, y: 1, r: 0 },
-    pts: ['Clear CO2 reduction methodology', 'Quantified impact model', 'UAE Net Zero 2050 alignment', 'Tabreed partnership talks'],
-    verdict: 'Accepted to Hub71 ClimateTech cohort' },
+    pts: ['Clear CO2 reduction methodology', 'Quantified impact model', 'UAE Net Zero 2050 alignment', 'Local partnership talks'],
+    verdict: 'Accepted to ClimateTech cohort' },
   edtech: { company: 'LearnMENA', desc: 'Arabic-first K-12 learning platform', sig: { g: 3, y: 2, r: 0 },
     pts: ['+15% test score improvement', 'Clear ICP: K-12 + schools', '70% DAU, 85% retention', 'Strong MENA relevance'],
-    verdict: 'Accepted to Hub71 EdTech program' }
+    verdict: 'Accepted to EdTech program' }
 };
 
 const AT = {
@@ -246,12 +291,12 @@ const AT = {
   aiteam: { a: 'Hire ML expertise', h: 'AI job boards', s: 'ML lead 3+ years', t: '4-6 weeks' },
   validation: { a: 'Secure real pilots', h: 'Reach 10 partners', s: '2+ agreements', t: '3-4 weeks' },
   modelmetrics: { a: 'Model monitoring', h: 'MLflow tracking', s: 'Metrics dashboard', t: '1-2 weeks' },
-  abudhabiai: { a: 'Explore AI71/Core42', h: 'Attend events', s: 'Integration plan', t: '2-3 weeks' },
+  abudhabiai: { a: 'Explore local AI ecosystem', h: 'Attend events', s: 'Integration plan', t: '2-3 weeks' },
   climatelogic: { a: 'Document CO2 path', h: 'Create methodology', s: 'Clear mechanism', t: '1 week' },
   impactmodel: { a: 'Build calculator', h: 'CO2e calculation tool', s: 'Working calculator', t: '1-2 weeks' },
   pilotready: { a: 'Prepare pilot', h: 'Complete prototype', s: '1 committed partner', t: '3-4 weeks' },
   localrelevance: { a: 'UAE Net Zero link', h: 'Document alignment', s: 'Alignment doc', t: '1 week' },
-  partnerships: { a: 'Climate partners', h: 'Contact Tabreed, TAQA', s: '2+ discussions', t: '2-4 weeks' },
+  partnerships: { a: 'Climate partners', h: 'Contact local energy companies', s: '2+ discussions', t: '2-4 weeks' },
   learningoutcome: { a: 'Define outcomes', h: 'Pre/post assessments', s: '+15% scores', t: '1-2 weeks' },
   targetuser: { a: 'Clarify ICP', h: 'Interview 10 users', s: 'Persona doc', t: '1-2 weeks' },
   engagement: { a: 'Improve retention', h: 'Gamification, streaks', s: '50%+ DAU', t: '3-4 weeks' },
@@ -294,7 +339,7 @@ function drawChart() {
 function render() {
   const app = $('app');
   if (step === 1) {
-    app.innerHTML = '<div class="step"><div class="header"><div class="logo"><span class="logo-text">Hub71</span><span class="logo-badge">Self-Check</span></div><h1>Are you ready for Hub71?</h1><p>Check your startup readiness for Hub71 programs. Select your vertical to begin the assessment.</p></div><div class="grid v4">' +
+    app.innerHTML = '<div class="step"><div class="header"><div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><span class="logo-text">Abu Dhabi Startup</span><span class="logo-badge">Self-Check</span></div><h1>Are you ready for Abu Dhabi?</h1><p>Check your startup readiness for Abu Dhabi accelerator programs. Select your vertical to begin the assessment.</p><div class="deco-line"></div></div><div class="grid v4">' +
       V.map(v => '<div class="card clickable" onclick="sel(\'' + v.id + '\')"><span class="card-tag">' + v.tag + '</span><div class="icon">' + v.icon + '</div><h3>' + v.name + '</h3><p>' + v.desc + '</p></div>').join('') + '</div></div>';
   } else if (step === 2) {
     const vd = V.find(x => x.id === vert), cr = C[vert], n = Object.keys(ans).length;
@@ -303,11 +348,11 @@ function render() {
       '<div class="flex justify-center"><button id="calc" class="btn btn-primary"' + (n === cr.length ? '' : ' disabled') + ' onclick="calc()">CALCULATE RESULTS →</button></div></div>';
   } else {
     const int = I[res.tier], ss = SS[vert], plan = getPlan();
-    app.innerHTML = '<div class="step"><h1 class="text-center">Your Readiness Results</h1><div class="result-card"><div class="donut"><canvas id="dc" width="180" height="180"></canvas><div class="donut-center"><span>' + res.tier + '</span><small>Tier</small></div></div><div class="mb"><span class="tier tier-' + res.tier.toLowerCase() + '">' + int.emoji + ' Tier ' + res.tier + ': ' + int.title + '</span></div><p style="color:var(--gray-dark)"><strong style="color:var(--green)">' + res.g + ' Green (' + res.gp + '%)</strong> · <strong style="color:var(--yellow)">' + res.y + ' Yellow (' + res.yp + '%)</strong> · <strong style="color:var(--red)">' + res.r + ' Red (' + res.rp + '%)</strong></p></div>' +
+    app.innerHTML = '<div class="step"><h1 class="text-center">Your Readiness Results</h1><div class="result-card"><div class="donut"><canvas id="dc" width="180" height="180"></canvas><div class="donut-center"><span>' + res.tier + '</span><small>Tier</small></div></div><div class="mb"><span class="tier tier-' + res.tier.toLowerCase() + '">' + int.emoji + ' Tier ' + res.tier + ': ' + int.title + '</span></div><div class="score-legend"><div class="score-item"><div class="score-dot g"></div><span>' + res.g + ' Strong (' + res.gp + '%)</span></div><div class="score-item"><div class="score-dot y"></div><span>' + res.y + ' Moderate (' + res.yp + '%)</span></div><div class="score-item"><div class="score-dot r"></div><span>' + res.r + ' Needs Work (' + res.rp + '%)</span></div></div></div>' +
       '<div class="interp mb"><h3>' + int.emoji + ' ' + int.sub + '</h3><h4 style="margin-top:1rem;color:var(--gray-dark)">What this means:</h4><ul class="points ' + (int.neg ? 'neg' : 'pos') + '">' + int.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="next-box"><h4>Next steps:</h4><ul style="list-style:none;margin:.5rem 0">' + int.next.map(s => '<li style="color:var(--gray-dark);padding:.25rem 0">→ ' + s + '</li>').join('') + '</ul></div><span class="timeline">📅 ' + int.time + '</span></div>' +
       (plan.length ? '<h2>Your Action Plan</h2><p class="mb" style="color:var(--gray)">Focus on these areas to improve:</p><div class="grid">' + plan.map(p => '<div class="action"><h4>' + (p.pr === 'high' ? '❌' : '⚠️') + ' ' + p.label + '<span class="priority ' + p.pr + '">' + p.pr + '</span></h4><p><strong>Current:</strong> ' + p.cur + '</p><p><strong>→ ACTION:</strong> ' + p.a + '</p><p><strong>→ HOW:</strong> ' + p.h + '</p><p><strong>→ SUCCESS:</strong> ' + p.s + '</p><p><strong>→ TIMELINE:</strong> ' + p.t + '</p></div>').join('') + '</div>' : '') +
-      '<h2 style="margin-top:2rem">Success Story</h2><div class="story"><div class="company">' + ss.company + '</div><p style="color:var(--gray)">' + ss.desc + '</p><div class="signals"><span class="signal g">' + ss.sig.g + ' Green</span><span class="signal y">' + ss.sig.y + ' Yellow</span><span class="signal r">' + ss.sig.r + ' Red</span></div><h4 style="margin-top:.75rem;color:var(--gray-dark)">What they did right:</h4><ul>' + ss.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="verdict">' + ss.verdict + '</div></div>' +
-      '<div class="flex justify-center gap flex-wrap" style="margin-top:2rem"><button class="btn btn-primary" onclick="step=1;vert=null;ans={};res=null;render()">START OVER</button><button class="btn btn-secondary" onclick="alert(\'PDF download coming soon!\')">DOWNLOAD PDF</button></div></div>';
+      '<h2 style="margin-top:2rem">Success Story</h2><div class="story"><div class="company">' + ss.company + '</div><p style="color:var(--gray)">' + ss.desc + '</p><div class="signals"><span class="signal g">' + ss.sig.g + ' Strong</span><span class="signal y">' + ss.sig.y + ' Moderate</span><span class="signal r">' + ss.sig.r + ' Weak</span></div><h4 style="margin-top:.75rem;color:var(--gray-dark)">What they did right:</h4><ul>' + ss.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="verdict">' + ss.verdict + '</div></div>' +
+      '<div class="flex justify-center gap flex-wrap" style="margin-top:2rem"><button class="btn btn-primary" onclick="step=1;vert=null;ans={};res=null;render()">START OVER</button><button class="btn btn-secondary" onclick="alert(\'PDF download coming soon!\')">DOWNLOAD PDF</button></div><div class="footer">This tool helps you self-assess readiness for Abu Dhabi startup accelerator programs.</div></div>';
     setTimeout(drawChart, 50);
   }
 }
