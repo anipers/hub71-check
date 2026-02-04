@@ -6,13 +6,21 @@
   <title>Abu Dhabi Startup Readiness Check</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --blue: #124ef5; --blue-dark: #0026ab; --blue-light: #4bace9;
-      --white: #FFFFFF; --gray-bg: #f5f7fa; --gray-light: #eff1f5; --gray: #6b7280; --gray-dark: #374151;
+      --blue-primary: #124ef5;
+      --blue-dark: #0026ab;
+      --blue-darker: #001d8a;
+      --white: #FFFFFF;
+      --gray-bg: #f5f7fa;
+      --gray-light: #eff1f5;
+      --gray: #6b7280;
+      --gray-dark: #374151;
       --black: #1a1a1a;
-      --green: #22c55e; --yellow: #f59e0b; --red: #ef4444;
+      --green: #22c55e;
+      --yellow: #f59e0b;
+      --red: #ef4444;
       --border: #e5e7eb;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -20,44 +28,64 @@
       font-family: 'Poppins', -apple-system, sans-serif;
       color: var(--black); background: var(--white); min-height: 100vh; line-height: 1.6;
     }
-    main { padding: 2rem; max-width: 1200px; margin: 0 auto; }
-    h1, h2, h3 { font-weight: 700; color: var(--blue-dark); }
-    h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 1rem; }
-    h2 { font-size: clamp(1.25rem, 3vw, 1.75rem); margin-bottom: 1rem; }
-    h3 { font-size: 1.1rem; margin-bottom: .5rem; font-weight: 600; }
-    p { color: var(--gray); margin-bottom: .5rem; }
-    .step { animation: fadeIn .4s ease-out; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    main { max-width: 100%; margin: 0 auto; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    h1, h2, h3 { font-weight: 700; }
+    h1 { font-size: clamp(2.5rem, 6vw, 4rem); line-height: 1.1; margin-bottom: 1.5rem; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: 1rem; color: var(--blue-dark); }
+    h3 { font-size: 1.1rem; margin-bottom: .5rem; font-weight: 600; color: var(--blue-dark); }
+    p { color: var(--gray-dark); margin-bottom: .5rem; }
+    .step { animation: fadeIn .5s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     
-    /* Header с графическими элементами */
-    .header {
-      text-align: center; margin: -2rem -2rem 2rem -2rem; padding: 3rem 2rem;
-      background: linear-gradient(135deg, var(--gray-bg) 0%, var(--white) 50%, var(--gray-bg) 100%);
-      position: relative; overflow: hidden;
+    /* HERO - синий блок как на Hub71 */
+    .hero {
+      background: var(--blue-dark);
+      color: var(--white);
+      padding: 6rem 0 8rem;
+      position: relative;
+      overflow: hidden;
     }
-    .header::before {
-      content: ''; position: absolute; top: -50%; right: -10%; width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(18,78,245,0.08) 0%, transparent 70%);
-      border-radius: 50%;
+    .hero h1 { color: var(--white); font-weight: 800; }
+    .hero p { color: rgba(255,255,255,0.85); font-size: 1.25rem; max-width: 700px; line-height: 1.7; }
+    
+    /* Геометрический элемент справа - октаэдр */
+    .geo-shape {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 200px;
+      height: 200px;
+      opacity: 0.6;
     }
-    .header::after {
-      content: ''; position: absolute; bottom: -30%; left: -5%; width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(75,172,233,0.06) 0%, transparent 70%);
-      border-radius: 50%;
+    .geo-shape svg {
+      width: 100%;
+      height: 100%;
+      stroke: rgba(255,255,255,0.4);
+      stroke-width: 1.5;
+      fill: none;
     }
-    .header h1, .header p { position: relative; z-index: 1; }
-    .header h1 { color: var(--blue-dark); }
-    .header p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; color: var(--gray-dark); }
+    @keyframes rotate3d {
+      0% { transform: translateY(-50%) rotateY(0deg) rotateX(10deg); }
+      100% { transform: translateY(-50%) rotateY(360deg) rotateX(10deg); }
+    }
+    .geo-shape { animation: rotate3d 30s linear infinite; }
     
     /* Декоративные линии */
-    .deco-line { width: 60px; height: 4px; background: var(--blue); margin: 1.5rem auto; }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: 
+        linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%),
+        linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%);
+      pointer-events: none;
+    }
     
-    /* Logo */
-    .logo { display: inline-flex; align-items: center; gap: .5rem; margin-bottom: 1.5rem; position: relative; z-index: 1; }
-    .logo-icon { width: 40px; height: 40px; background: var(--blue); display: flex; align-items: center; justify-content: center; }
-    .logo-icon svg { width: 24px; height: 24px; fill: var(--white); }
-    .logo-text { font-weight: 700; font-size: 1.1rem; color: var(--blue-dark); }
-    .logo-badge { background: var(--blue); color: var(--white); padding: .25rem .75rem; font-size: .7rem; font-weight: 600; }
+    /* Content Section */
+    .content-section { padding: 4rem 0; }
+    .content-section.alt { background: var(--gray-bg); }
     
     /* Grid */
     .grid { display: grid; gap: 1.5rem; margin: 2rem 0; }
@@ -66,147 +94,393 @@
     
     /* Cards */
     .card {
-      background: var(--white); border: 1px solid var(--border);
-      padding: 1.5rem; transition: all .2s ease; position: relative;
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      transition: all .3s ease;
+      position: relative;
     }
     .card::before {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
-      background: var(--blue); transform: scaleX(0); transition: transform .3s; transform-origin: left;
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--blue-primary);
+      transform: scaleX(0);
+      transition: transform .3s;
+      transform-origin: left;
     }
     .card:hover::before { transform: scaleX(1); }
-    .card:hover { border-color: var(--blue-light); background: var(--gray-bg); }
-    .card.clickable {
-      cursor: pointer; text-align: center; min-height: 200px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    .card:hover { 
+      border-color: var(--blue-primary);
+      box-shadow: 0 10px 40px rgba(0,38,171,0.1);
+      transform: translateY(-4px);
     }
-    .icon { font-size: 2.5rem; margin-bottom: 1rem; }
-    .card-tag { display: inline-block; background: var(--blue); color: var(--white); padding: .25rem .75rem; font-size: .65rem; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 1rem; }
-    .card h3 { color: var(--blue-dark); }
+    .card.clickable {
+      cursor: pointer;
+      text-align: center;
+      min-height: 220px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .card-tag {
+      display: inline-block;
+      background: var(--blue-dark);
+      color: var(--white);
+      padding: .35rem 1rem;
+      font-size: .7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .card h3 { color: var(--blue-dark); margin-bottom: .5rem; }
+    .card p { font-size: .95rem; }
     
-    /* Radio - БЕЗ ЦВЕТНОЙ ПОДСВЕТКИ */
-    .radio-group { display: flex; flex-direction: column; gap: .5rem; margin-top: 1rem; }
+    /* Question Cards */
+    .question-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .question-card h3 { font-size: 1.15rem; }
+    
+    /* Radio - ПОЛНОСТЬЮ НЕЙТРАЛЬНЫЕ */
+    .radio-group { display: flex; flex-direction: column; gap: .75rem; margin-top: 1.25rem; }
     .radio {
-      display: flex; align-items: center; padding: 1rem 1.25rem;
-      background: var(--white); border: 1px solid var(--border);
-      cursor: pointer; transition: all .2s;
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all .2s;
     }
     .radio:hover { background: var(--gray-bg); border-color: var(--gray); }
     .radio input {
-      appearance: none; width: 18px; height: 18px; border: 2px solid var(--border);
-      margin-right: 1rem; flex-shrink: 0; transition: all .2s; position: relative;
+      appearance: none;
+      width: 20px; height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 0;
+      margin-right: 1rem;
+      flex-shrink: 0;
+      transition: all .2s;
+      position: relative;
     }
-    .radio input:checked { border-color: var(--blue); background: var(--blue); }
+    .radio input:checked {
+      border-color: var(--blue-primary);
+      background: var(--blue-primary);
+    }
     .radio input:checked::after {
-      content: '✓'; position: absolute; top: 50%; left: 50%;
-      transform: translate(-50%, -50%); font-size: 12px; color: var(--white);
+      content: '✓';
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12px;
+      color: var(--white);
     }
-    .radio span { color: var(--gray-dark); font-size: .95rem; }
-    /* Только тонкая левая полоска для индикации типа ответа */
-    .radio.g { border-left: 3px solid var(--green); }
-    .radio.y { border-left: 3px solid var(--yellow); }
-    .radio.r { border-left: 3px solid var(--red); }
-    .radio:has(input:checked) { background: var(--gray-bg); border-color: var(--blue); }
+    .radio span { color: var(--gray-dark); font-size: 1rem; }
+    .radio:has(input:checked) {
+      background: var(--gray-bg);
+      border-color: var(--blue-primary);
+    }
     
     /* Progress */
-    .progress-wrap { margin: 1.5rem 0; background: var(--gray-bg); padding: 1rem 1.5rem; }
-    .progress-label { display: flex; justify-content: space-between; margin-bottom: .5rem; font-size: .875rem; color: var(--gray-dark); font-weight: 500; }
-    .progress { width: 100%; height: 8px; background: var(--border); }
-    .progress-fill { height: 100%; background: var(--blue); transition: width .4s; }
+    .progress-section {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+    }
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: .75rem;
+      font-size: .9rem;
+      color: var(--gray-dark);
+      font-weight: 500;
+    }
+    .progress {
+      width: 100%;
+      height: 6px;
+      background: var(--border);
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--blue-primary);
+      transition: width .4s;
+    }
     
     /* Buttons */
     .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
-      padding: 1rem 2rem; font-family: 'Poppins', sans-serif; font-size: .95rem; font-weight: 600;
-      border: none; cursor: pointer; transition: all .2s; text-transform: uppercase; letter-spacing: .5px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      padding: 1.1rem 2.5rem;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all .3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
-    .btn-primary { background: var(--blue); color: var(--white); }
-    .btn-primary:hover { background: var(--blue-dark); }
-    .btn-secondary { background: var(--white); color: var(--blue); border: 2px solid var(--blue); }
-    .btn-secondary:hover { background: var(--gray-bg); }
-    .btn:disabled { opacity: .4; cursor: not-allowed; }
+    .btn-primary {
+      background: var(--blue-primary);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(18,78,245,0.3);
+    }
+    .btn-secondary {
+      background: var(--white);
+      color: var(--blue-dark);
+      border: 2px solid var(--blue-dark);
+    }
+    .btn-secondary:hover {
+      background: var(--blue-dark);
+      color: var(--white);
+    }
+    .btn-white {
+      background: var(--white);
+      color: var(--blue-dark);
+    }
+    .btn-white:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
+    }
+    .btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
     
     /* Tier Badge */
-    .tier { display: inline-flex; align-items: center; gap: .5rem; padding: .75rem 1.5rem; font-weight: 700; font-size: 1rem; }
+    .tier {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      padding: 1rem 2rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
     .tier-a { background: var(--green); color: var(--white); }
     .tier-b { background: var(--yellow); color: var(--white); }
     .tier-c { background: var(--red); color: var(--white); }
     
-    /* Donut */
-    .donut { position: relative; width: 180px; height: 180px; margin: 2rem auto; }
-    .donut-center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
-    .donut-center span { display: block; font-size: 3rem; font-weight: 700; color: var(--blue-dark); }
-    .donut-center small { color: var(--gray); font-size: .875rem; }
+    /* Donut Chart */
+    .donut { position: relative; width: 200px; height: 200px; margin: 2rem auto; }
+    .donut-center {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .donut-center span {
+      display: block;
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--blue-dark);
+    }
+    .donut-center small { color: var(--gray); font-size: 1rem; }
     
-    /* Result Card с графикой */
-    .result-card {
-      background: linear-gradient(135deg, var(--gray-bg) 0%, var(--white) 100%);
-      padding: 2rem; margin-bottom: 1.5rem; text-align: center;
-      position: relative; overflow: hidden;
+    /* Result Hero */
+    .result-hero {
+      background: var(--blue-dark);
+      color: var(--white);
+      padding: 4rem 0;
+      text-align: center;
     }
-    .result-card::before {
-      content: ''; position: absolute; top: 0; right: 0; width: 150px; height: 150px;
-      background: radial-gradient(circle, rgba(18,78,245,0.05) 0%, transparent 70%);
-    }
+    .result-hero h1 { color: var(--white); margin-bottom: 2rem; }
     
     /* Score Legend */
-    .score-legend { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem; }
-    .score-item { display: flex; align-items: center; gap: .5rem; font-size: .9rem; }
-    .score-dot { width: 12px; height: 12px; }
+    .score-legend {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .score-item {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      font-size: 1rem;
+      color: var(--white);
+    }
+    .score-dot { width: 14px; height: 14px; }
     .score-dot.g { background: var(--green); }
     .score-dot.y { background: var(--yellow); }
     .score-dot.r { background: var(--red); }
     
     /* Action Items */
-    .action { background: var(--white); border: 1px solid var(--border); padding: 1.25rem; margin-bottom: 1rem; }
-    .action:hover { border-color: var(--blue-light); }
-    .action h4 { display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; margin-bottom: .75rem; color: var(--blue-dark); }
-    .priority { padding: .25rem .75rem; font-size: .7rem; font-weight: 600; text-transform: uppercase; }
+    .action {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      transition: all .2s;
+    }
+    .action:hover { border-color: var(--blue-primary); }
+    .action h4 {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      color: var(--blue-dark);
+      font-size: 1.1rem;
+    }
+    .priority {
+      padding: .3rem .75rem;
+      font-size: .7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+    }
     .priority.high { background: #fee2e2; color: var(--red); }
     .priority.medium { background: #fef3c7; color: var(--yellow); }
-    .action p { font-size: .9rem; margin-bottom: .25rem; color: var(--gray-dark); }
+    .action p { font-size: .95rem; margin-bottom: .35rem; }
     .action strong { color: var(--black); }
     
     /* Success Story */
-    .story { background: var(--gray-bg); border-left: 4px solid var(--blue); padding: 1.5rem; }
-    .story .company { font-weight: 700; font-size: 1.25rem; color: var(--blue); margin-bottom: .25rem; }
-    .signals { display: flex; gap: .5rem; margin: 1rem 0; flex-wrap: wrap; }
-    .signal { padding: .25rem .75rem; font-size: .8rem; font-weight: 500; }
+    .story {
+      background: var(--gray-bg);
+      border-left: 4px solid var(--blue-primary);
+      padding: 2rem;
+    }
+    .story .company {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--blue-dark);
+      margin-bottom: .25rem;
+    }
+    .signals { display: flex; gap: .75rem; margin: 1.25rem 0; flex-wrap: wrap; }
+    .signal { padding: .35rem 1rem; font-size: .85rem; font-weight: 500; }
     .signal.g { background: #dcfce7; color: var(--green); }
     .signal.y { background: #fef3c7; color: var(--yellow); }
     .signal.r { background: #fee2e2; color: var(--red); }
     .story ul { list-style: none; margin: 1rem 0; }
-    .story li { padding: .25rem 0 .25rem 1.5rem; position: relative; color: var(--gray-dark); font-size: .9rem; }
-    .story li::before { content: '✓'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
-    .verdict { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); font-style: italic; color: var(--gray); font-size: .9rem; }
+    .story li {
+      padding: .35rem 0 .35rem 1.75rem;
+      position: relative;
+      color: var(--gray-dark);
+      font-size: .95rem;
+    }
+    .story li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--blue-primary);
+      font-weight: 700;
+    }
+    .verdict {
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      font-style: italic;
+      color: var(--gray);
+    }
     
     /* Interpretation */
-    .interp { background: var(--white); border: 1px solid var(--border); padding: 1.5rem; }
-    .interp h3 { color: var(--blue-dark); }
-    .next-box { background: var(--gray-bg); padding: 1rem; margin-top: 1rem; }
-    .next-box h4 { color: var(--blue); margin-bottom: .5rem; font-size: 1rem; }
-    .timeline { margin-top: 1rem; padding: .5rem 1rem; background: var(--blue); color: var(--white); display: inline-block; font-weight: 600; font-size: .875rem; }
+    .interp {
+      background: var(--white);
+      border: 1px solid var(--border);
+      padding: 2rem;
+    }
+    .interp h3 { font-size: 1.25rem; margin-bottom: 1rem; }
+    .next-box {
+      background: var(--gray-bg);
+      padding: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .next-box h4 {
+      color: var(--blue-dark);
+      margin-bottom: .75rem;
+      font-size: 1.1rem;
+    }
+    .timeline {
+      margin-top: 1.25rem;
+      padding: .75rem 1.5rem;
+      background: var(--blue-primary);
+      color: var(--white);
+      display: inline-block;
+      font-weight: 600;
+    }
     .points { list-style: none; margin: 1rem 0; }
-    .points li { padding: .25rem 0 .25rem 1.5rem; position: relative; color: var(--gray-dark); }
-    .points.pos li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
-    .points.neg li::before { content: '✗'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+    .points li {
+      padding: .35rem 0 .35rem 1.75rem;
+      position: relative;
+      color: var(--gray-dark);
+    }
+    .points.pos li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--green);
+      font-weight: 700;
+    }
+    .points.neg li::before {
+      content: '✗';
+      position: absolute;
+      left: 0;
+      color: var(--red);
+      font-weight: 700;
+    }
     
     /* Footer */
-    .footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--border); color: var(--gray); font-size: .85rem; }
+    .footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      background: var(--blue-darker);
+      color: rgba(255,255,255,0.7);
+      font-size: .9rem;
+    }
+    
+    /* Back button in header */
+    .page-header {
+      background: var(--blue-dark);
+      padding: 2rem 0;
+      color: var(--white);
+    }
+    .page-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .page-header h2 { color: var(--white); margin: 0; }
+    .page-header p { color: rgba(255,255,255,0.8); margin: 0; }
     
     /* Utilities */
-    .flex { display: flex; } .flex-wrap { flex-wrap: wrap; } .gap { gap: 1rem; }
-    .justify-center { justify-content: center; } .justify-between { justify-content: space-between; }
-    .items-center { align-items: center; } .text-center { text-align: center; } .mb { margin-bottom: 1.5rem; }
+    .flex { display: flex; }
+    .flex-wrap { flex-wrap: wrap; }
+    .gap { gap: 1rem; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .items-center { align-items: center; }
+    .text-center { text-align: center; }
+    .mb { margin-bottom: 1.5rem; }
+    .mt { margin-top: 2rem; }
     
+    @media (max-width: 1024px) {
+      .geo-shape { width: 150px; height: 150px; right: 2%; opacity: 0.4; }
+    }
     @media (max-width: 767px) {
-      main { padding: 1rem; }
-      .header { margin: -1rem -1rem 1.5rem -1rem; padding: 2rem 1rem; }
-      .card.clickable { min-height: 160px; padding: 1.25rem; }
-      .icon { font-size: 2rem; }
+      .container { padding: 0 1.25rem; }
+      .hero { padding: 4rem 0 5rem; }
+      .geo-shape { display: none; }
+      .card.clickable { min-height: 180px; padding: 1.5rem; }
+      .icon { font-size: 2.5rem; }
       .btn { width: 100%; }
-      .donut { width: 150px; height: 150px; }
-      .donut-center span { font-size: 2.5rem; }
+      .donut { width: 160px; height: 160px; }
+      .donut-center span { font-size: 3rem; }
       .score-legend { gap: 1rem; }
+      .question-card { padding: 1.5rem; }
     }
   </style>
 </head>
@@ -222,47 +496,47 @@ const V = [
 
 const C = {
   fintech: [
-    { id: 'stage', label: 'Product Stage', g: 'Live with paying users', y: 'MVP tests', r: 'Idea only' },
-    { id: 'traction', label: 'Traction Proof', g: 'Active users/revenue', y: 'POCs', r: 'No validation' },
-    { id: 'metrics', label: 'Business Metrics', g: 'Track MRR, CAC, LTV', y: 'Track some', r: "Don't track" },
-    { id: 'regulatory', label: 'Regulatory Knowledge', g: 'Know ADGM/have roadmap', y: 'Basic awareness', r: 'No knowledge' },
-    { id: 'abudhabi', label: 'Abu Dhabi Fit', g: 'Clear strategy', y: 'General interest', r: 'No rationale' }
+    { id: 'stage', label: 'Product Stage', g: 'Live with paying users', y: 'MVP in testing', r: 'Idea stage only' },
+    { id: 'traction', label: 'Traction Proof', g: 'Active users or revenue', y: 'POCs in progress', r: 'No validation yet' },
+    { id: 'metrics', label: 'Business Metrics', g: 'Track MRR, CAC, LTV', y: 'Track some metrics', r: "Don't track metrics" },
+    { id: 'regulatory', label: 'Regulatory Knowledge', g: 'Know ADGM, have roadmap', y: 'Basic awareness', r: 'No knowledge' },
+    { id: 'abudhabi', label: 'Abu Dhabi Strategy', g: 'Clear go-to-market plan', y: 'General interest', r: 'No specific rationale' }
   ],
   ai: [
-    { id: 'aicore', label: 'AI Core', g: 'Without AI = no product', y: 'AI important feature', r: 'AI is nice-to-have' },
+    { id: 'aicore', label: 'AI Core', g: 'Without AI = no product', y: 'AI is important feature', r: 'AI is nice-to-have' },
     { id: 'aiteam', label: 'AI Team', g: 'ML lead with 3+ years', y: 'Junior ML engineer', r: 'No AI expertise' },
-    { id: 'validation', label: 'Validation', g: 'Real pilots with partners', y: 'Lab tests only', r: 'No validation' },
-    { id: 'modelmetrics', label: 'Model Metrics', g: 'Track accuracy, latency, cost', y: 'Track some', r: "Don't track" },
+    { id: 'validation', label: 'Validation', g: 'Real pilots with partners', y: 'Lab tests only', r: 'No validation yet' },
+    { id: 'modelmetrics', label: 'Model Metrics', g: 'Track accuracy, latency, cost', y: 'Track some metrics', r: "Don't track metrics" },
     { id: 'abudhabiai', label: 'Abu Dhabi AI Ecosystem', g: 'Plan to use local AI resources', y: 'General interest', r: 'No specific plan' }
   ],
   climate: [
     { id: 'climatelogic', label: 'Climate Logic', g: 'Clear CO2/energy reduction path', y: 'General climate benefit', r: 'Unclear connection' },
     { id: 'impactmodel', label: 'Impact Model', g: 'Calculate CO2e/energy saved', y: 'Rough estimates', r: 'No calculations' },
-    { id: 'pilotready', label: 'Pilot Ready', g: 'Ready for pilot now', y: 'Prototype stage', r: 'Not ready' },
+    { id: 'pilotready', label: 'Pilot Readiness', g: 'Ready for pilot now', y: 'Prototype stage', r: 'Not ready yet' },
     { id: 'localrelevance', label: 'Local Relevance', g: 'Ties to UAE Net Zero 2050', y: 'MENA relevant', r: 'No local angle' },
-    { id: 'partnerships', label: 'Partnerships', g: 'Talks with local partners', y: 'Potential partners identified', r: 'No partners' }
+    { id: 'partnerships', label: 'Partnerships', g: 'Talks with local partners', y: 'Partners identified', r: 'No partners yet' }
   ],
   edtech: [
     { id: 'learningoutcome', label: 'Learning Outcome', g: 'Specific measurable outcome', y: 'General improvement', r: 'Unclear outcome' },
-    { id: 'targetuser', label: 'Target User', g: 'Clear ICP + buyer', y: 'Know user, unclear buyer', r: 'Unclear both' },
+    { id: 'targetuser', label: 'Target User', g: 'Clear ICP and buyer', y: 'Know user, unclear buyer', r: 'Unclear on both' },
     { id: 'engagement', label: 'Engagement', g: 'High DAU, good retention', y: 'Medium engagement', r: 'Low engagement' },
-    { id: 'marketmena', label: 'Market MENA', g: 'Strong MENA relevance', y: 'Could work in MENA', r: 'Not MENA-specific' },
-    { id: 'edpartners', label: 'Partnerships', g: 'School/Ministry partnerships', y: 'Potential partners', r: 'No partnerships' }
+    { id: 'marketmena', label: 'MENA Market', g: 'Strong MENA relevance', y: 'Could work in MENA', r: 'Not MENA-specific' },
+    { id: 'edpartners', label: 'Partnerships', g: 'School/Ministry partnerships', y: 'Potential partners', r: 'No partnerships yet' }
   ]
 };
 
 const I = {
   A: { emoji: '✅', title: 'High Readiness', sub: 'You look like a STRONG candidate for Abu Dhabi accelerator programs.',
-    pts: ['Clear product-market fit', 'Evidence of traction', 'Ready for Abu Dhabi expansion'],
-    next: ["Apply now (don't wait for perfection)", 'Focus pitch on your strong signals', 'Explain Abu Dhabi as strategic choice'],
+    pts: ['Clear product-market fit signals', 'Evidence of real traction', 'Ready for Abu Dhabi expansion'],
+    next: ["Apply now — don't wait for perfection", 'Focus your pitch on strong signals', 'Position Abu Dhabi as strategic choice'],
     time: 'Apply within 1 week' },
   B: { emoji: '🟡', title: 'Borderline', sub: 'You have a SOLID FOUNDATION but need to strengthen a few areas.',
-    pts: ['You understand what matters', 'Some risks, but manageable', 'Accelerators exist to help with gaps'],
-    next: ['Strengthen your yellow/red signals (2-4 weeks)', 'Option A: Apply now, explain gaps', 'Option B: Improve for 3 weeks, then apply'],
+    pts: ['You understand what matters', 'Some risks, but manageable', 'Accelerators can help fill gaps'],
+    next: ['Strengthen your weaker signals (2-4 weeks)', 'Option A: Apply now, explain gaps honestly', 'Option B: Improve for 3 weeks, then apply'],
     time: '2-4 weeks improvement → apply' },
   C: { emoji: '🔴', title: 'Early Stage', sub: "Your profile doesn't match typical accelerator candidates YET.",
-    pts: ['Too early stage OR', 'Missing validation OR', 'Unclear Abu Dhabi strategy'], neg: true,
-    next: ['Consider earlier-stage programs (Initiate)', 'Month 1-2: Get live product + validation', 'Month 3: Build team + market clarity'],
+    pts: ['Too early stage OR', 'Missing key validation OR', 'Unclear Abu Dhabi strategy'], neg: true,
+    next: ['Consider earlier-stage programs', 'Month 1-2: Get live product + validation', 'Month 3: Build team + market clarity'],
     time: '3-4 months → re-assess' }
 };
 
@@ -330,29 +604,32 @@ function getPlan() {
 }
 function drawChart() {
   const cv = $('dc'); if (!cv) return;
-  const ctx = cv.getContext('2d'), cx = 90, cy = 90, R = 75, r = 50, t = res.gp + res.yp + res.rp;
+  const ctx = cv.getContext('2d'), cx = 100, cy = 100, R = 85, r = 55, t = res.gp + res.yp + res.rp;
   if (!t) return; let a = -Math.PI / 2;
   [[res.gp, '#22c55e'], [res.yp, '#f59e0b'], [res.rp, '#ef4444']].forEach(([p, c]) => {
     if (p > 0) { const ang = p / t * 2 * Math.PI; ctx.beginPath(); ctx.arc(cx, cy, R, a, a + ang); ctx.arc(cx, cy, r, a + ang, a, true); ctx.closePath(); ctx.fillStyle = c; ctx.fill(); a += ang; }
   });
 }
+
+const geoSVG = '<svg viewBox="0 0 100 100"><polygon points="50,5 95,30 95,70 50,95 5,70 5,30"/><line x1="50" y1="5" x2="50" y2="95"/><line x1="5" y1="30" x2="95" y2="70"/><line x1="95" y1="30" x2="5" y2="70"/><line x1="5" y1="50" x2="95" y2="50"/></svg>';
+
 function render() {
   const app = $('app');
   if (step === 1) {
-    app.innerHTML = '<div class="step"><div class="header"><div class="logo"><div class="logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><span class="logo-text">Abu Dhabi Startup</span><span class="logo-badge">Self-Check</span></div><h1>Are you ready for Abu Dhabi?</h1><p>Check your startup readiness for Abu Dhabi accelerator programs. Select your vertical to begin the assessment.</p><div class="deco-line"></div></div><div class="grid v4">' +
-      V.map(v => '<div class="card clickable" onclick="sel(\'' + v.id + '\')"><span class="card-tag">' + v.tag + '</span><div class="icon">' + v.icon + '</div><h3>' + v.name + '</h3><p>' + v.desc + '</p></div>').join('') + '</div></div>';
+    app.innerHTML = '<div class="step"><div class="hero"><div class="container"><h1>Grow your startup<br>in Abu Dhabi</h1><p>Are you a disruptive entrepreneur or a pioneering problem-solver seeking investment? Check your readiness for Abu Dhabi\'s leading accelerator programs. Select your vertical to begin.</p><div style="margin-top:2rem"><a href="#verticals" class="btn btn-white">GET STARTED →</a></div></div><div class="geo-shape">' + geoSVG + '</div></div><section id="verticals" class="content-section"><div class="container"><h2>Select Your Vertical</h2><p style="color:var(--gray);margin-bottom:2rem">Choose the category that best describes your startup</p><div class="grid v4">' +
+      V.map(v => '<div class="card clickable" onclick="sel(\'' + v.id + '\')"><span class="card-tag">' + v.tag + '</span><div class="icon">' + v.icon + '</div><h3>' + v.name + '</h3><p>' + v.desc + '</p></div>').join('') + '</div></div></section></div>';
   } else if (step === 2) {
     const vd = V.find(x => x.id === vert), cr = C[vert], n = Object.keys(ans).length;
-    app.innerHTML = '<div class="step"><div class="flex justify-between items-center flex-wrap gap mb"><div><h2>' + vd.icon + ' ' + vd.name + '</h2><p>Answer all questions to see your readiness score</p></div><button class="btn btn-secondary" onclick="step=1;vert=null;ans={};render()">← BACK</button></div><div class="progress-wrap"><div class="progress-label"><span>Progress</span><span id="pc">' + n + ' / ' + cr.length + '</span></div><div class="progress"><div class="progress-fill" id="pf" style="width:' + (n / cr.length * 100) + '%"></div></div></div>' +
-      cr.map((c, i) => '<div class="card mb"><h3>' + (i + 1) + '. ' + c.label + '</h3><div class="radio-group"><label class="radio g"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'g' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'g\')"><span>' + c.g + '</span></label><label class="radio y"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'y' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'y\')"><span>' + c.y + '</span></label><label class="radio r"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'r' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'r\')"><span>' + c.r + '</span></label></div></div>').join('') +
-      '<div class="flex justify-center"><button id="calc" class="btn btn-primary"' + (n === cr.length ? '' : ' disabled') + ' onclick="calc()">CALCULATE RESULTS →</button></div></div>';
+    app.innerHTML = '<div class="step"><div class="page-header"><div class="container"><div><h2>' + vd.icon + ' ' + vd.name + '</h2><p>Answer all questions to see your readiness score</p></div><button class="btn btn-white" onclick="step=1;vert=null;ans={};render()">← BACK</button></div></div><section class="content-section"><div class="container"><div class="progress-section"><div class="progress-label"><span>Progress</span><span id="pc">' + n + ' / ' + cr.length + '</span></div><div class="progress"><div class="progress-fill" id="pf" style="width:' + (n / cr.length * 100) + '%"></div></div></div>' +
+      cr.map((c, i) => '<div class="question-card"><h3>' + (i + 1) + '. ' + c.label + '</h3><div class="radio-group"><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'g' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'g\')"><span>' + c.g + '</span></label><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'y' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'y\')"><span>' + c.y + '</span></label><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'r' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'r\')"><span>' + c.r + '</span></label></div></div>').join('') +
+      '<div class="flex justify-center mt"><button id="calc" class="btn btn-primary"' + (n === cr.length ? '' : ' disabled') + ' onclick="calc()">CALCULATE RESULTS →</button></div></div></section></div>';
   } else {
     const int = I[res.tier], ss = SS[vert], plan = getPlan();
-    app.innerHTML = '<div class="step"><h1 class="text-center">Your Readiness Results</h1><div class="result-card"><div class="donut"><canvas id="dc" width="180" height="180"></canvas><div class="donut-center"><span>' + res.tier + '</span><small>Tier</small></div></div><div class="mb"><span class="tier tier-' + res.tier.toLowerCase() + '">' + int.emoji + ' Tier ' + res.tier + ': ' + int.title + '</span></div><div class="score-legend"><div class="score-item"><div class="score-dot g"></div><span>' + res.g + ' Strong (' + res.gp + '%)</span></div><div class="score-item"><div class="score-dot y"></div><span>' + res.y + ' Moderate (' + res.yp + '%)</span></div><div class="score-item"><div class="score-dot r"></div><span>' + res.r + ' Needs Work (' + res.rp + '%)</span></div></div></div>' +
-      '<div class="interp mb"><h3>' + int.emoji + ' ' + int.sub + '</h3><h4 style="margin-top:1rem;color:var(--gray-dark)">What this means:</h4><ul class="points ' + (int.neg ? 'neg' : 'pos') + '">' + int.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="next-box"><h4>Next steps:</h4><ul style="list-style:none;margin:.5rem 0">' + int.next.map(s => '<li style="color:var(--gray-dark);padding:.25rem 0">→ ' + s + '</li>').join('') + '</ul></div><span class="timeline">📅 ' + int.time + '</span></div>' +
-      (plan.length ? '<h2>Your Action Plan</h2><p class="mb" style="color:var(--gray)">Focus on these areas to improve:</p><div class="grid">' + plan.map(p => '<div class="action"><h4>' + (p.pr === 'high' ? '❌' : '⚠️') + ' ' + p.label + '<span class="priority ' + p.pr + '">' + p.pr + '</span></h4><p><strong>Current:</strong> ' + p.cur + '</p><p><strong>→ ACTION:</strong> ' + p.a + '</p><p><strong>→ HOW:</strong> ' + p.h + '</p><p><strong>→ SUCCESS:</strong> ' + p.s + '</p><p><strong>→ TIMELINE:</strong> ' + p.t + '</p></div>').join('') + '</div>' : '') +
-      '<h2 style="margin-top:2rem">Success Story</h2><div class="story"><div class="company">' + ss.company + '</div><p style="color:var(--gray)">' + ss.desc + '</p><div class="signals"><span class="signal g">' + ss.sig.g + ' Strong</span><span class="signal y">' + ss.sig.y + ' Moderate</span><span class="signal r">' + ss.sig.r + ' Weak</span></div><h4 style="margin-top:.75rem;color:var(--gray-dark)">What they did right:</h4><ul>' + ss.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="verdict">' + ss.verdict + '</div></div>' +
-      '<div class="flex justify-center gap flex-wrap" style="margin-top:2rem"><button class="btn btn-primary" onclick="step=1;vert=null;ans={};res=null;render()">START OVER</button><button class="btn btn-secondary" onclick="alert(\'PDF download coming soon!\')">DOWNLOAD PDF</button></div><div class="footer">This tool helps you self-assess readiness for Abu Dhabi startup accelerator programs.</div></div>';
+    app.innerHTML = '<div class="step"><div class="result-hero"><div class="container"><h1>Your Readiness Results</h1><div class="donut"><canvas id="dc" width="200" height="200"></canvas><div class="donut-center"><span>' + res.tier + '</span><small>Tier</small></div></div><div class="mb"><span class="tier tier-' + res.tier.toLowerCase() + '">' + int.emoji + ' Tier ' + res.tier + ': ' + int.title + '</span></div><div class="score-legend"><div class="score-item"><div class="score-dot g"></div><span>' + res.g + ' Strong (' + res.gp + '%)</span></div><div class="score-item"><div class="score-dot y"></div><span>' + res.y + ' Moderate (' + res.yp + '%)</span></div><div class="score-item"><div class="score-dot r"></div><span>' + res.r + ' Needs Work (' + res.rp + '%)</span></div></div></div></div>' +
+      '<section class="content-section"><div class="container"><div class="interp mb"><h3>' + int.emoji + ' ' + int.sub + '</h3><h4 style="margin-top:1.25rem;color:var(--gray-dark)">What this means:</h4><ul class="points ' + (int.neg ? 'neg' : 'pos') + '">' + int.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="next-box"><h4>Recommended next steps:</h4><ul style="list-style:none;margin:.75rem 0">' + int.next.map(s => '<li style="color:var(--gray-dark);padding:.35rem 0">→ ' + s + '</li>').join('') + '</ul></div><span class="timeline">📅 ' + int.time + '</span></div>' +
+      (plan.length ? '<h2 class="mt">Your Action Plan</h2><p class="mb" style="color:var(--gray)">Focus on these areas to improve your readiness:</p><div class="grid">' + plan.map(p => '<div class="action"><h4>' + (p.pr === 'high' ? '❌' : '⚠️') + ' ' + p.label + '<span class="priority ' + p.pr + '">' + p.pr + '</span></h4><p><strong>Current:</strong> ' + p.cur + '</p><p><strong>→ Action:</strong> ' + p.a + '</p><p><strong>→ How:</strong> ' + p.h + '</p><p><strong>→ Success:</strong> ' + p.s + '</p><p><strong>→ Timeline:</strong> ' + p.t + '</p></div>').join('') + '</div>' : '') +
+      '<h2 class="mt">Success Story</h2><div class="story"><div class="company">' + ss.company + '</div><p style="color:var(--gray)">' + ss.desc + '</p><div class="signals"><span class="signal g">' + ss.sig.g + ' Strong</span><span class="signal y">' + ss.sig.y + ' Moderate</span><span class="signal r">' + ss.sig.r + ' Weak</span></div><h4 style="margin-top:1rem;color:var(--gray-dark)">What they did right:</h4><ul>' + ss.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="verdict">' + ss.verdict + '</div></div>' +
+      '<div class="flex justify-center gap flex-wrap mt"><button class="btn btn-primary" onclick="step=1;vert=null;ans={};res=null;render()">START OVER</button><button class="btn btn-secondary" onclick="alert(\'PDF download coming soon!\')">DOWNLOAD PDF</button></div></div></section><div class="footer">This tool helps you self-assess readiness for Abu Dhabi startup accelerator programs.</div></div>';
     setTimeout(drawChart, 50);
   }
 }
