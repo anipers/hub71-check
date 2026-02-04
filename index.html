@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,8 +23,10 @@
       --yellow: #f59e0b;
       --red: #ef4444;
       --border: #e5e7eb;
+      --font-size-base: 16px;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: var(--font-size-base); }
     body {
       font-family: 'Poppins', -apple-system, sans-serif;
       color: var(--black);
@@ -32,6 +34,30 @@
       min-height: 100vh;
       line-height: 1.6;
     }
+    /* High contrast mode */
+    body.high-contrast {
+      --white: #000000;
+      --black: #FFFFFF;
+      --gray-bg: #1a1a1a;
+      --gray-light: #2a2a2a;
+      --gray: #cccccc;
+      --gray-dark: #e0e0e0;
+      --border: #444444;
+    }
+    body.high-contrast .site-header { background: #000; border-color: #333; }
+    body.high-contrast .hero { background: #000; }
+    body.high-contrast .benefits-bar { background: #1a1a1a; }
+    body.high-contrast .card { background: #1a1a1a; }
+    body.high-contrast .footer { background: #000; }
+    
+    /* RTL support */
+    html[dir="rtl"] body { font-family: 'Poppins', 'Noto Sans Arabic', sans-serif; }
+    html[dir="rtl"] .card::before { transform-origin: right; }
+    html[dir="rtl"] .radio input { margin-right: 0; margin-left: 1rem; }
+    html[dir="rtl"] .story { border-left: none; border-right: 4px solid var(--blue-primary); }
+    html[dir="rtl"] .points li, html[dir="rtl"] .story li { padding-left: 0; padding-right: 1.75rem; }
+    html[dir="rtl"] .points li::before, html[dir="rtl"] .story li::before { left: auto; right: 0; }
+    
     main { max-width: 100%; margin: 0 auto; }
     .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
     h1, h2, h3 { font-weight: 700; }
@@ -41,6 +67,177 @@
     p { color: var(--gray-dark); margin-bottom: .5rem; }
     .step { animation: fadeIn .5s ease-out; }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    /* SITE HEADER - like Hub71 */
+    .site-header {
+      background: var(--white);
+      padding: 1rem 0;
+      border-bottom: 4px solid var(--blue-dark);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .site-header .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      gap: .5rem;
+    }
+    .logo-text {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--blue-dark);
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+    .logo-text span {
+      color: var(--blue-primary);
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .header-btn {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--white);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: .9rem;
+      color: var(--black);
+    }
+    .header-btn:hover {
+      border-color: var(--blue-primary);
+      background: var(--gray-bg);
+    }
+    .header-btn.active {
+      background: var(--blue-primary);
+      color: var(--white);
+      border-color: var(--blue-primary);
+    }
+    .header-btn svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+    .menu-btn {
+      background: var(--blue-primary);
+      border-color: var(--blue-primary);
+    }
+    .menu-btn svg {
+      stroke: var(--white);
+    }
+    .menu-btn:hover {
+      background: var(--blue-dark);
+    }
+    
+    /* Accessibility Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      display: none;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 1rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .a11y-modal {
+      background: var(--white);
+      width: 320px;
+      max-width: 100%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      animation: slideIn .3s ease;
+    }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    .a11y-header {
+      background: var(--gray-bg);
+      padding: 1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .a11y-header h3 {
+      margin: 0;
+      font-size: 1rem;
+      color: var(--blue-dark);
+    }
+    .a11y-close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: .5rem;
+      display: flex;
+    }
+    .a11y-close svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--gray-dark);
+      stroke-width: 2;
+    }
+    .a11y-section {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .a11y-section:last-child { border-bottom: none; }
+    .a11y-section h4 {
+      font-size: .85rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .a11y-options {
+      display: flex;
+      gap: .5rem;
+    }
+    .a11y-opt {
+      flex: 1;
+      padding: .75rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: .9rem;
+      color: var(--gray-dark);
+      transition: all .2s;
+    }
+    .a11y-opt:hover { border-color: var(--blue-primary); }
+    .a11y-opt.active {
+      background: var(--blue-primary);
+      color: var(--white);
+      border-color: var(--blue-primary);
+    }
+    .a11y-reset {
+      width: 100%;
+      padding: .75rem;
+      background: var(--gray-bg);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      font-size: .9rem;
+      color: var(--gray-dark);
+      transition: all .2s;
+      margin-top: 1rem;
+    }
+    .a11y-reset:hover { background: var(--border); }
     
     /* HERO */
     .hero {
@@ -69,6 +266,7 @@
       height: 180px;
       opacity: 0.5;
     }
+    html[dir="rtl"] .geo-shape { right: auto; left: 8%; }
     .geo-shape svg {
       width: 100%;
       height: 100%;
@@ -82,7 +280,7 @@
     }
     .geo-shape { animation: rotateGeo 40s linear infinite; }
     
-    /* Benefits bar - как на Hub71 */
+    /* Benefits bar */
     .benefits-bar {
       background: var(--blue-light);
       padding: 2.5rem 0;
@@ -169,7 +367,7 @@
       justify-content: center;
     }
     
-    /* Card icon - outline style like Hub71 */
+    /* Card icon */
     .card-icon {
       width: 72px;
       height: 72px;
@@ -218,7 +416,7 @@
     }
     .question-card h3 { font-size: 1.1rem; color: var(--blue-dark); }
     
-    /* Radio - neutral style */
+    /* Radio */
     .radio-group { display: flex; flex-direction: column; gap: .75rem; margin-top: 1.25rem; }
     .radio {
       display: flex;
@@ -553,13 +751,114 @@
       .donut-center span { font-size: 3rem; }
       .score-legend { gap: 1rem; }
       .question-card { padding: 1.5rem; }
+      .logo-text { font-size: 1.25rem; }
+      .header-btn { width: 40px; height: 40px; }
     }
   </style>
 </head>
 <body>
+<!-- Site Header -->
+<header class="site-header">
+  <div class="container">
+    <a href="#" class="logo-link" onclick="step=1;vert=null;ans={};res=null;render();return false;">
+      <span class="logo-text">S<span>RC</span></span>
+    </a>
+    <div class="header-actions">
+      <button class="header-btn" id="langBtn" onclick="toggleLang()" title="العربية">AR</button>
+      <button class="header-btn" id="a11yBtn" onclick="toggleA11yModal()" title="Accessibility">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M12 8v8M8 10h8M9 22l3-6 3 6"/></svg>
+      </button>
+      <button class="header-btn menu-btn" onclick="alert('Menu coming soon')">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Accessibility Modal -->
+<div class="modal-overlay" id="a11yModal" onclick="if(event.target===this)toggleA11yModal()">
+  <div class="a11y-modal">
+    <div class="a11y-header">
+      <h3>Accessibility Menu</h3>
+      <button class="a11y-close" onclick="toggleA11yModal()">
+        <svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="a11y-section">
+      <h4>Text</h4>
+      <p style="margin-bottom:.75rem;font-size:.85rem;color:var(--gray)">Font Size</p>
+      <div class="a11y-options">
+        <button class="a11y-opt" onclick="setFontSize(14)" data-size="14">A-</button>
+        <button class="a11y-opt active" onclick="setFontSize(16)" data-size="16">A</button>
+        <button class="a11y-opt" onclick="setFontSize(18)" data-size="18">A+</button>
+        <button class="a11y-opt" onclick="setFontSize(20)" data-size="20">A++</button>
+      </div>
+    </div>
+    <div class="a11y-section">
+      <h4>Visual Assistance</h4>
+      <p style="margin-bottom:.75rem;font-size:.85rem;color:var(--gray)">Contrast</p>
+      <div class="a11y-options">
+        <button class="a11y-opt active" onclick="setContrast('normal')" data-contrast="normal">Normal</button>
+        <button class="a11y-opt" onclick="setContrast('high')" data-contrast="high">High</button>
+      </div>
+      <button class="a11y-reset" onclick="resetA11y()">Reset</button>
+    </div>
+  </div>
+</div>
+
 <main id="app"></main>
+
 <script>
-// SVG Icons - outline style
+// Accessibility functions
+let currentLang = 'en';
+let currentFontSize = 16;
+let currentContrast = 'normal';
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'ar' : 'en';
+  const html = document.documentElement;
+  const btn = document.getElementById('langBtn');
+  if (currentLang === 'ar') {
+    html.setAttribute('dir', 'rtl');
+    html.setAttribute('lang', 'ar');
+    btn.textContent = 'EN';
+    btn.classList.add('active');
+  } else {
+    html.setAttribute('dir', 'ltr');
+    html.setAttribute('lang', 'en');
+    btn.textContent = 'AR';
+    btn.classList.remove('active');
+  }
+  render();
+}
+
+function toggleA11yModal() {
+  const modal = document.getElementById('a11yModal');
+  modal.classList.toggle('open');
+}
+
+function setFontSize(size) {
+  currentFontSize = size;
+  document.documentElement.style.setProperty('--font-size-base', size + 'px');
+  document.querySelectorAll('.a11y-opt[data-size]').forEach(btn => {
+    btn.classList.toggle('active', parseInt(btn.dataset.size) === size);
+  });
+}
+
+function setContrast(mode) {
+  currentContrast = mode;
+  document.body.classList.toggle('high-contrast', mode === 'high');
+  document.querySelectorAll('.a11y-opt[data-contrast]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.contrast === mode);
+  });
+}
+
+function resetA11y() {
+  setFontSize(16);
+  setContrast('normal');
+}
+
+// SVG Icons
 const ICONS = {
   fintech: '<svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/><circle cx="16" cy="15" r="2"/></svg>',
   ai: '<svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="1.5"/><circle cx="15" cy="10" r="1.5"/><path d="M9 15h6"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>',
@@ -574,72 +873,150 @@ const ICONS = {
 
 const geoSVG = '<svg viewBox="0 0 100 100"><polygon points="50,5 95,30 95,70 50,95 5,70 5,30"/><line x1="50" y1="5" x2="50" y2="95"/><line x1="5" y1="30" x2="95" y2="70"/><line x1="95" y1="30" x2="5" y2="70"/></svg>';
 
+// Translations
+const T = {
+  en: {
+    heroTitle: 'Startup<br>Readiness Check',
+    heroDesc: 'Are you a disruptive entrepreneur, or a pioneering problem-solver or innovative startup seeking investment options? Check your readiness for leading accelerator programs.',
+    getStarted: 'GET STARTED →',
+    vibrantCommunity: 'A vibrant tech community',
+    benefit1: 'Comprehensive readiness assessment',
+    benefit2: 'Growth with accelerator programs',
+    benefit3: 'Engage with corporate partners',
+    benefit4: 'Gain access to investors',
+    benefit5: 'Favourable regulatory environment',
+    selectVertical: 'Select Your Vertical',
+    selectDesc: 'Choose the category that best describes your startup',
+    assessment: 'Assessment',
+    answerAll: 'Answer all questions to see your readiness score',
+    back: '← BACK',
+    progress: 'Progress',
+    calculate: 'CALCULATE RESULTS →',
+    results: 'Your Readiness Results',
+    tier: 'Tier',
+    strong: 'Strong',
+    moderate: 'Moderate',
+    needsWork: 'Needs Work',
+    whatMeans: 'What this means:',
+    nextSteps: 'Recommended next steps:',
+    actionPlan: 'Your Action Plan',
+    actionDesc: 'Focus on these areas to improve your readiness:',
+    successStory: 'Success Story',
+    whatRight: 'What they did right:',
+    startOver: 'START OVER',
+    downloadPdf: 'DOWNLOAD PDF',
+    footer: 'Startup Readiness Check — Self-assessment tool for accelerator programs',
+    current: 'Current:',
+    action: '→ Action:',
+    how: '→ How:',
+    success: '→ Success:',
+    timeline: '→ Timeline:'
+  },
+  ar: {
+    heroTitle: 'فحص جاهزية<br>الشركات الناشئة',
+    heroDesc: 'هل أنت رائد أعمال مبتكر أو حل مشاكل رائد أو شركة ناشئة مبتكرة تبحث عن خيارات استثمارية؟ تحقق من جاهزيتك لبرامج التسريع الرائدة.',
+    getStarted: 'ابدأ الآن ←',
+    vibrantCommunity: 'مجتمع تقني نابض بالحياة',
+    benefit1: 'تقييم شامل للجاهزية',
+    benefit2: 'النمو مع برامج التسريع',
+    benefit3: 'التعامل مع الشركاء المؤسسيين',
+    benefit4: 'الوصول إلى المستثمرين',
+    benefit5: 'بيئة تنظيمية مواتية',
+    selectVertical: 'اختر مجالك',
+    selectDesc: 'اختر الفئة التي تصف شركتك الناشئة بشكل أفضل',
+    assessment: 'التقييم',
+    answerAll: 'أجب على جميع الأسئلة لرؤية نتيجة جاهزيتك',
+    back: 'رجوع →',
+    progress: 'التقدم',
+    calculate: 'احسب النتائج ←',
+    results: 'نتائج جاهزيتك',
+    tier: 'المستوى',
+    strong: 'قوي',
+    moderate: 'متوسط',
+    needsWork: 'يحتاج عمل',
+    whatMeans: 'ماذا يعني هذا:',
+    nextSteps: 'الخطوات التالية الموصى بها:',
+    actionPlan: 'خطة العمل الخاصة بك',
+    actionDesc: 'ركز على هذه المجالات لتحسين جاهزيتك:',
+    successStory: 'قصة نجاح',
+    whatRight: 'ما فعلوه بشكل صحيح:',
+    startOver: 'ابدأ من جديد',
+    downloadPdf: 'تحميل PDF',
+    footer: 'فحص جاهزية الشركات الناشئة — أداة تقييم ذاتي لبرامج التسريع',
+    current: 'الحالي:',
+    action: '← الإجراء:',
+    how: '← كيف:',
+    success: '← النجاح:',
+    timeline: '← الجدول الزمني:'
+  }
+};
+
 const V = [
-  { id: 'fintech', name: 'Fintech / Web3', icon: 'fintech', desc: 'Payments, DeFi, Banking, Crypto', tag: 'Digital Assets' },
-  { id: 'ai', name: 'AI', icon: 'ai', desc: 'Machine Learning, LLMs, Computer Vision', tag: 'Artificial Intelligence' },
-  { id: 'climate', name: 'ClimateTech', icon: 'climate', desc: 'Sustainability, Clean Energy, Carbon', tag: 'Climate Tech' },
-  { id: 'edtech', name: 'EdTech', icon: 'edtech', desc: 'Learning, Skills, Education Platforms', tag: 'Education' }
+  { id: 'fintech', name: 'Fintech / Web3', nameAr: 'التقنية المالية / ويب3', icon: 'fintech', desc: 'Payments, DeFi, Banking, Crypto', descAr: 'المدفوعات، التمويل اللامركزي، البنوك، العملات المشفرة', tag: 'Digital Assets', tagAr: 'الأصول الرقمية' },
+  { id: 'ai', name: 'AI', nameAr: 'الذكاء الاصطناعي', icon: 'ai', desc: 'Machine Learning, LLMs, Computer Vision', descAr: 'التعلم الآلي، النماذج اللغوية، الرؤية الحاسوبية', tag: 'Artificial Intelligence', tagAr: 'الذكاء الاصطناعي' },
+  { id: 'climate', name: 'ClimateTech', nameAr: 'تقنيات المناخ', icon: 'climate', desc: 'Sustainability, Clean Energy, Carbon', descAr: 'الاستدامة، الطاقة النظيفة، الكربون', tag: 'Climate Tech', tagAr: 'تقنيات المناخ' },
+  { id: 'edtech', name: 'EdTech', nameAr: 'تقنيات التعليم', icon: 'edtech', desc: 'Learning, Skills, Education Platforms', descAr: 'التعلم، المهارات، منصات التعليم', tag: 'Education', tagAr: 'التعليم' }
 ];
 
 const C = {
   fintech: [
-    { id: 'stage', label: 'Product Stage', g: 'Live with paying users', y: 'MVP in testing', r: 'Idea stage only' },
-    { id: 'traction', label: 'Traction Proof', g: 'Active users or revenue', y: 'POCs in progress', r: 'No validation yet' },
-    { id: 'metrics', label: 'Business Metrics', g: 'Track MRR, CAC, LTV', y: 'Track some metrics', r: "Don't track metrics" },
-    { id: 'regulatory', label: 'Regulatory Knowledge', g: 'Know regulations, have roadmap', y: 'Basic awareness', r: 'No knowledge' },
-    { id: 'market', label: 'Market Strategy', g: 'Clear go-to-market plan', y: 'General interest', r: 'No specific rationale' }
+    { id: 'stage', label: 'Product Stage', labelAr: 'مرحلة المنتج', g: 'Live with paying users', gAr: 'مباشر مع مستخدمين يدفعون', y: 'MVP in testing', yAr: 'MVP قيد الاختبار', r: 'Idea stage only', rAr: 'مرحلة الفكرة فقط' },
+    { id: 'traction', label: 'Traction Proof', labelAr: 'إثبات الجذب', g: 'Active users or revenue', gAr: 'مستخدمون نشطون أو إيرادات', y: 'POCs in progress', yAr: 'إثباتات المفهوم قيد التقدم', r: 'No validation yet', rAr: 'لا يوجد تحقق بعد' },
+    { id: 'metrics', label: 'Business Metrics', labelAr: 'مقاييس الأعمال', g: 'Track MRR, CAC, LTV', gAr: 'تتبع MRR، CAC، LTV', y: 'Track some metrics', yAr: 'تتبع بعض المقاييس', r: "Don't track metrics", rAr: 'لا تتبع المقاييس' },
+    { id: 'regulatory', label: 'Regulatory Knowledge', labelAr: 'المعرفة التنظيمية', g: 'Know regulations, have roadmap', gAr: 'تعرف اللوائح، لديك خارطة طريق', y: 'Basic awareness', yAr: 'وعي أساسي', r: 'No knowledge', rAr: 'لا معرفة' },
+    { id: 'market', label: 'Market Strategy', labelAr: 'استراتيجية السوق', g: 'Clear go-to-market plan', gAr: 'خطة واضحة للوصول للسوق', y: 'General interest', yAr: 'اهتمام عام', r: 'No specific rationale', rAr: 'لا مبرر محدد' }
   ],
   ai: [
-    { id: 'aicore', label: 'AI Core', g: 'Without AI = no product', y: 'AI is important feature', r: 'AI is nice-to-have' },
-    { id: 'aiteam', label: 'AI Team', g: 'ML lead with 3+ years', y: 'Junior ML engineer', r: 'No AI expertise' },
-    { id: 'validation', label: 'Validation', g: 'Real pilots with partners', y: 'Lab tests only', r: 'No validation yet' },
-    { id: 'modelmetrics', label: 'Model Metrics', g: 'Track accuracy, latency, cost', y: 'Track some metrics', r: "Don't track metrics" },
-    { id: 'ecosystem', label: 'AI Ecosystem Fit', g: 'Plan to integrate with ecosystem', y: 'General interest', r: 'No specific plan' }
+    { id: 'aicore', label: 'AI Core', labelAr: 'جوهر الذكاء الاصطناعي', g: 'Without AI = no product', gAr: 'بدون AI = لا منتج', y: 'AI is important feature', yAr: 'AI ميزة مهمة', r: 'AI is nice-to-have', rAr: 'AI إضافة جيدة' },
+    { id: 'aiteam', label: 'AI Team', labelAr: 'فريق AI', g: 'ML lead with 3+ years', gAr: 'قائد ML بخبرة 3+ سنوات', y: 'Junior ML engineer', yAr: 'مهندس ML مبتدئ', r: 'No AI expertise', rAr: 'لا خبرة في AI' },
+    { id: 'validation', label: 'Validation', labelAr: 'التحقق', g: 'Real pilots with partners', gAr: 'تجارب حقيقية مع شركاء', y: 'Lab tests only', yAr: 'اختبارات معملية فقط', r: 'No validation yet', rAr: 'لا تحقق بعد' },
+    { id: 'modelmetrics', label: 'Model Metrics', labelAr: 'مقاييس النموذج', g: 'Track accuracy, latency, cost', gAr: 'تتبع الدقة، الكمون، التكلفة', y: 'Track some metrics', yAr: 'تتبع بعض المقاييس', r: "Don't track metrics", rAr: 'لا تتبع المقاييس' },
+    { id: 'ecosystem', label: 'AI Ecosystem Fit', labelAr: 'ملاءمة نظام AI', g: 'Plan to integrate with ecosystem', gAr: 'خطة للتكامل مع النظام', y: 'General interest', yAr: 'اهتمام عام', r: 'No specific plan', rAr: 'لا خطة محددة' }
   ],
   climate: [
-    { id: 'climatelogic', label: 'Climate Logic', g: 'Clear CO2/energy reduction path', y: 'General climate benefit', r: 'Unclear connection' },
-    { id: 'impactmodel', label: 'Impact Model', g: 'Calculate CO2e/energy saved', y: 'Rough estimates', r: 'No calculations' },
-    { id: 'pilotready', label: 'Pilot Readiness', g: 'Ready for pilot now', y: 'Prototype stage', r: 'Not ready yet' },
-    { id: 'localrelevance', label: 'Local Relevance', g: 'Ties to regional climate goals', y: 'Generally relevant', r: 'No local angle' },
-    { id: 'partnerships', label: 'Partnerships', g: 'Talks with local partners', y: 'Partners identified', r: 'No partners yet' }
+    { id: 'climatelogic', label: 'Climate Logic', labelAr: 'منطق المناخ', g: 'Clear CO2/energy reduction path', gAr: 'مسار واضح لتقليل CO2/الطاقة', y: 'General climate benefit', yAr: 'فائدة مناخية عامة', r: 'Unclear connection', rAr: 'اتصال غير واضح' },
+    { id: 'impactmodel', label: 'Impact Model', labelAr: 'نموذج التأثير', g: 'Calculate CO2e/energy saved', gAr: 'حساب CO2e/الطاقة الموفرة', y: 'Rough estimates', yAr: 'تقديرات تقريبية', r: 'No calculations', rAr: 'لا حسابات' },
+    { id: 'pilotready', label: 'Pilot Readiness', labelAr: 'جاهزية التجربة', g: 'Ready for pilot now', gAr: 'جاهز للتجربة الآن', y: 'Prototype stage', yAr: 'مرحلة النموذج الأولي', r: 'Not ready yet', rAr: 'غير جاهز بعد' },
+    { id: 'localrelevance', label: 'Local Relevance', labelAr: 'الصلة المحلية', g: 'Ties to regional climate goals', gAr: 'ارتباط بأهداف المناخ الإقليمية', y: 'Generally relevant', yAr: 'ذو صلة عامة', r: 'No local angle', rAr: 'لا زاوية محلية' },
+    { id: 'partnerships', label: 'Partnerships', labelAr: 'الشراكات', g: 'Talks with local partners', gAr: 'محادثات مع شركاء محليين', y: 'Partners identified', yAr: 'تم تحديد الشركاء', r: 'No partners yet', rAr: 'لا شركاء بعد' }
   ],
   edtech: [
-    { id: 'learningoutcome', label: 'Learning Outcome', g: 'Specific measurable outcome', y: 'General improvement', r: 'Unclear outcome' },
-    { id: 'targetuser', label: 'Target User', g: 'Clear ICP and buyer', y: 'Know user, unclear buyer', r: 'Unclear on both' },
-    { id: 'engagement', label: 'Engagement', g: 'High DAU, good retention', y: 'Medium engagement', r: 'Low engagement' },
-    { id: 'market', label: 'Market Fit', g: 'Strong regional relevance', y: 'Could work regionally', r: 'Not region-specific' },
-    { id: 'edpartners', label: 'Partnerships', g: 'School/Ministry partnerships', y: 'Potential partners', r: 'No partnerships yet' }
+    { id: 'learningoutcome', label: 'Learning Outcome', labelAr: 'نتيجة التعلم', g: 'Specific measurable outcome', gAr: 'نتيجة قابلة للقياس محددة', y: 'General improvement', yAr: 'تحسن عام', r: 'Unclear outcome', rAr: 'نتيجة غير واضحة' },
+    { id: 'targetuser', label: 'Target User', labelAr: 'المستخدم المستهدف', g: 'Clear ICP and buyer', gAr: 'ICP ومشتري واضح', y: 'Know user, unclear buyer', yAr: 'تعرف المستخدم، المشتري غير واضح', r: 'Unclear on both', rAr: 'غير واضح في كليهما' },
+    { id: 'engagement', label: 'Engagement', labelAr: 'المشاركة', g: 'High DAU, good retention', gAr: 'DAU عالي، احتفاظ جيد', y: 'Medium engagement', yAr: 'مشاركة متوسطة', r: 'Low engagement', rAr: 'مشاركة منخفضة' },
+    { id: 'market', label: 'Market Fit', labelAr: 'ملاءمة السوق', g: 'Strong regional relevance', gAr: 'صلة إقليمية قوية', y: 'Could work regionally', yAr: 'يمكن أن يعمل إقليمياً', r: 'Not region-specific', rAr: 'غير خاص بالمنطقة' },
+    { id: 'edpartners', label: 'Partnerships', labelAr: 'الشراكات', g: 'School/Ministry partnerships', gAr: 'شراكات مدارس/وزارة', y: 'Potential partners', yAr: 'شركاء محتملون', r: 'No partnerships yet', rAr: 'لا شراكات بعد' }
   ]
 };
 
 const I = {
-  A: { emoji: '✅', title: 'High Readiness', sub: 'You look like a STRONG candidate for accelerator programs.',
-    pts: ['Clear product-market fit signals', 'Evidence of real traction', 'Ready for rapid scaling'],
-    next: ["Apply now — don't wait for perfection", 'Focus your pitch on strong signals', 'Position yourself as a strategic choice'],
-    time: 'Apply within 1 week' },
-  B: { emoji: '🟡', title: 'Borderline', sub: 'You have a SOLID FOUNDATION but need to strengthen a few areas.',
-    pts: ['You understand what matters', 'Some risks, but manageable', 'Accelerators can help fill gaps'],
-    next: ['Strengthen your weaker signals (2-4 weeks)', 'Option A: Apply now, explain gaps honestly', 'Option B: Improve for 3 weeks, then apply'],
-    time: '2-4 weeks improvement → apply' },
-  C: { emoji: '🔴', title: 'Early Stage', sub: "Your profile doesn't match typical accelerator candidates YET.",
-    pts: ['Too early stage OR', 'Missing key validation OR', 'Unclear market strategy'], neg: true,
-    next: ['Consider earlier-stage programs', 'Month 1-2: Get live product + validation', 'Month 3: Build team + market clarity'],
-    time: '3-4 months → re-assess' }
+  A: { emoji: '✅', title: 'High Readiness', titleAr: 'جاهزية عالية', sub: 'You look like a STRONG candidate for accelerator programs.', subAr: 'تبدو مرشحًا قويًا لبرامج التسريع.',
+    pts: ['Clear product-market fit signals', 'Evidence of real traction', 'Ready for rapid scaling'], ptsAr: ['إشارات واضحة لملاءمة المنتج للسوق', 'دليل على جذب حقيقي', 'جاهز للتوسع السريع'],
+    next: ["Apply now — don't wait for perfection", 'Focus your pitch on strong signals', 'Position yourself as a strategic choice'], nextAr: ['قدم الآن — لا تنتظر الكمال', 'ركز عرضك على الإشارات القوية', 'ضع نفسك كخيار استراتيجي'],
+    time: 'Apply within 1 week', timeAr: 'قدم خلال أسبوع واحد' },
+  B: { emoji: '🟡', title: 'Borderline', titleAr: 'على الحدود', sub: 'You have a SOLID FOUNDATION but need to strengthen a few areas.', subAr: 'لديك أساس متين لكن تحتاج تقوية بعض المجالات.',
+    pts: ['You understand what matters', 'Some risks, but manageable', 'Accelerators can help fill gaps'], ptsAr: ['تفهم ما يهم', 'بعض المخاطر، لكنها قابلة للإدارة', 'المسرعات يمكن أن تساعد في سد الفجوات'],
+    next: ['Strengthen your weaker signals (2-4 weeks)', 'Option A: Apply now, explain gaps honestly', 'Option B: Improve for 3 weeks, then apply'], nextAr: ['قوِّ إشاراتك الأضعف (2-4 أسابيع)', 'الخيار أ: قدم الآن، اشرح الفجوات بصدق', 'الخيار ب: حسّن لـ 3 أسابيع، ثم قدم'],
+    time: '2-4 weeks improvement → apply', timeAr: '2-4 أسابيع تحسين ← قدم' },
+  C: { emoji: '🔴', title: 'Early Stage', titleAr: 'مرحلة مبكرة', sub: "Your profile doesn't match typical accelerator candidates YET.", subAr: 'ملفك لا يطابق المرشحين النموذجيين للمسرعات بعد.',
+    pts: ['Too early stage OR', 'Missing key validation OR', 'Unclear market strategy'], ptsAr: ['مرحلة مبكرة جدًا أو', 'تحقق رئيسي مفقود أو', 'استراتيجية سوق غير واضحة'], neg: true,
+    next: ['Consider earlier-stage programs', 'Month 1-2: Get live product + validation', 'Month 3: Build team + market clarity'], nextAr: ['فكر في برامج المراحل المبكرة', 'الشهر 1-2: احصل على منتج مباشر + تحقق', 'الشهر 3: ابنِ فريقًا + وضوح السوق'],
+    time: '3-4 months → re-assess', timeAr: '3-4 أشهر ← إعادة تقييم' }
 };
 
 const SS = {
-  fintech: { company: 'QuickPay', desc: 'Expense Management SaaS', sig: { g: 6, y: 2, r: 0 },
-    pts: ['$1.2M profit, not just idea', 'Clear ICP and market', '800% YoY growth'],
-    verdict: "Verdict: 'Strong candidate, help needed with regional partnerships'" },
-  ai: { company: 'VisionAI', desc: 'Computer vision platform for retail analytics', sig: { g: 5, y: 0, r: 0 },
-    pts: ['AI core to product value', 'ML team with 5+ years', 'Active pilots with 3 retailers', 'Ecosystem integration planned'],
-    verdict: 'Fast-tracked to AI program, secured enterprise partnerships' },
-  climate: { company: 'CarbonTrack', desc: 'Carbon accounting platform', sig: { g: 4, y: 1, r: 0 },
-    pts: ['Clear CO2 reduction methodology', 'Quantified impact model', 'Climate goals alignment', 'Local partnership talks'],
-    verdict: 'Accepted to ClimateTech cohort' },
-  edtech: { company: 'LearnMENA', desc: 'Arabic-first K-12 learning platform', sig: { g: 3, y: 2, r: 0 },
-    pts: ['+15% test score improvement', 'Clear ICP: K-12 + schools', '70% DAU, 85% retention', 'Strong regional relevance'],
-    verdict: 'Accepted to EdTech program' }
+  fintech: { company: 'QuickPay', desc: 'Expense Management SaaS', descAr: 'SaaS لإدارة النفقات', sig: { g: 6, y: 2, r: 0 },
+    pts: ['$1.2M profit, not just idea', 'Clear ICP and market', '800% YoY growth'], ptsAr: ['ربح 1.2 مليون دولار، ليس مجرد فكرة', 'ICP وسوق واضح', 'نمو 800% سنويًا'],
+    verdict: "Verdict: 'Strong candidate, help needed with regional partnerships'", verdictAr: "الحكم: 'مرشح قوي، يحتاج مساعدة في الشراكات الإقليمية'" },
+  ai: { company: 'VisionAI', desc: 'Computer vision platform for retail analytics', descAr: 'منصة رؤية حاسوبية لتحليلات التجزئة', sig: { g: 5, y: 0, r: 0 },
+    pts: ['AI core to product value', 'ML team with 5+ years', 'Active pilots with 3 retailers', 'Ecosystem integration planned'], ptsAr: ['AI أساسي لقيمة المنتج', 'فريق ML بخبرة 5+ سنوات', 'تجارب نشطة مع 3 تجار', 'تكامل مع النظام مخطط'],
+    verdict: 'Fast-tracked to AI program, secured enterprise partnerships', verdictAr: 'تم تسريعه لبرنامج AI، حصل على شراكات مؤسسية' },
+  climate: { company: 'CarbonTrack', desc: 'Carbon accounting platform', descAr: 'منصة محاسبة الكربون', sig: { g: 4, y: 1, r: 0 },
+    pts: ['Clear CO2 reduction methodology', 'Quantified impact model', 'Climate goals alignment', 'Local partnership talks'], ptsAr: ['منهجية واضحة لتقليل CO2', 'نموذج تأثير كمي', 'توافق مع أهداف المناخ', 'محادثات شراكة محلية'],
+    verdict: 'Accepted to ClimateTech cohort', verdictAr: 'تم قبوله في مجموعة ClimateTech' },
+  edtech: { company: 'LearnMENA', desc: 'Arabic-first K-12 learning platform', descAr: 'منصة تعليم K-12 بالعربية أولاً', sig: { g: 3, y: 2, r: 0 },
+    pts: ['+15% test score improvement', 'Clear ICP: K-12 + schools', '70% DAU, 85% retention', 'Strong regional relevance'], ptsAr: ['تحسن 15%+ في درجات الاختبار', 'ICP واضح: K-12 + مدارس', '70% DAU، 85% احتفاظ', 'صلة إقليمية قوية'],
+    verdict: 'Accepted to EdTech program', verdictAr: 'تم قبوله في برنامج EdTech' }
 };
 
 const AT = {
@@ -666,6 +1043,7 @@ const AT = {
 
 let step = 1, vert = null, ans = {}, res = null;
 const $ = id => document.getElementById(id);
+const t = key => T[currentLang][key] || T.en[key];
 
 function sel(v) { vert = v; ans = {}; step = 2; render(); }
 function answer(id, val) {
@@ -684,38 +1062,51 @@ function calc() {
 function getPlan() {
   if (!vert) return [];
   return Object.entries(ans).filter(([, v]) => v === 'y' || v === 'r').map(([id, v]) => {
-    const c = C[vert].find(x => x.id === id), t = AT[id];
-    return c && t ? { label: c.label, pr: v === 'r' ? 'high' : 'medium', cur: c[v], ...t } : null;
+    const c = C[vert].find(x => x.id === id), at = AT[id];
+    const lbl = currentLang === 'ar' ? c.labelAr : c.label;
+    const cur = currentLang === 'ar' ? c[v + 'Ar'] : c[v];
+    return c && at ? { label: lbl, pr: v === 'r' ? 'high' : 'medium', cur, ...at } : null;
   }).filter(Boolean);
 }
 function drawChart() {
   const cv = $('dc'); if (!cv) return;
-  const ctx = cv.getContext('2d'), cx = 100, cy = 100, R = 85, r = 55, t = res.gp + res.yp + res.rp;
-  if (!t) return; let a = -Math.PI / 2;
+  const ctx = cv.getContext('2d'), cx = 100, cy = 100, R = 85, r = 55, total = res.gp + res.yp + res.rp;
+  if (!total) return; let a = -Math.PI / 2;
   [[res.gp, '#22c55e'], [res.yp, '#f59e0b'], [res.rp, '#ef4444']].forEach(([p, c]) => {
-    if (p > 0) { const ang = p / t * 2 * Math.PI; ctx.beginPath(); ctx.arc(cx, cy, R, a, a + ang); ctx.arc(cx, cy, r, a + ang, a, true); ctx.closePath(); ctx.fillStyle = c; ctx.fill(); a += ang; }
+    if (p > 0) { const ang = p / total * 2 * Math.PI; ctx.beginPath(); ctx.arc(cx, cy, R, a, a + ang); ctx.arc(cx, cy, r, a + ang, a, true); ctx.closePath(); ctx.fillStyle = c; ctx.fill(); a += ang; }
   });
 }
 
 function render() {
   const app = $('app');
+  const isAr = currentLang === 'ar';
+  
   if (step === 1) {
-    app.innerHTML = '<div class="step"><div class="hero"><div class="container"><h1>Startup<br>Readiness Check</h1><p>Are you a disruptive entrepreneur, or a pioneering problem-solver or innovative startup seeking investment options? Check your readiness for leading accelerator programs.</p><div style="margin-top:2rem"><a href="#verticals" class="btn btn-white">GET STARTED →</a></div></div><div class="geo-shape">' + geoSVG + '</div></div>' +
-      '<div class="benefits-bar"><div class="container"><h4>A vibrant tech community</h4><div class="benefits-grid"><div class="benefit-item"><div class="benefit-icon">' + ICONS.check + '</div><div class="benefit-text">Comprehensive readiness assessment</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.growth + '</div><div class="benefit-text">Growth with accelerator programs</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.partners + '</div><div class="benefit-text">Engage with corporate partners</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.investors + '</div><div class="benefit-text">Gain access to investors</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.regulatory + '</div><div class="benefit-text">Favourable regulatory environment</div></div></div></div></div>' +
-      '<section id="verticals" class="content-section"><div class="container"><h2>Select Your Vertical</h2><p style="color:var(--gray);margin-bottom:2rem">Choose the category that best describes your startup</p><div class="grid v4">' +
-      V.map(v => '<div class="card clickable" onclick="sel(\'' + v.id + '\')"><span class="card-tag">' + v.tag + '</span><div class="card-icon">' + ICONS[v.icon] + '</div><h3>' + v.name + '</h3><p>' + v.desc + '</p></div>').join('') + '</div></div></section></div>';
+    app.innerHTML = '<div class="step"><div class="hero"><div class="container"><h1>' + t('heroTitle') + '</h1><p>' + t('heroDesc') + '</p><div style="margin-top:2rem"><a href="#verticals" class="btn btn-white">' + t('getStarted') + '</a></div></div><div class="geo-shape">' + geoSVG + '</div></div>' +
+      '<div class="benefits-bar"><div class="container"><h4>' + t('vibrantCommunity') + '</h4><div class="benefits-grid"><div class="benefit-item"><div class="benefit-icon">' + ICONS.check + '</div><div class="benefit-text">' + t('benefit1') + '</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.growth + '</div><div class="benefit-text">' + t('benefit2') + '</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.partners + '</div><div class="benefit-text">' + t('benefit3') + '</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.investors + '</div><div class="benefit-text">' + t('benefit4') + '</div></div><div class="benefit-item"><div class="benefit-icon">' + ICONS.regulatory + '</div><div class="benefit-text">' + t('benefit5') + '</div></div></div></div></div>' +
+      '<section id="verticals" class="content-section"><div class="container"><h2>' + t('selectVertical') + '</h2><p style="color:var(--gray);margin-bottom:2rem">' + t('selectDesc') + '</p><div class="grid v4">' +
+      V.map(v => '<div class="card clickable" onclick="sel(\'' + v.id + '\')"><span class="card-tag">' + (isAr ? v.tagAr : v.tag) + '</span><div class="card-icon">' + ICONS[v.icon] + '</div><h3>' + (isAr ? v.nameAr : v.name) + '</h3><p>' + (isAr ? v.descAr : v.desc) + '</p></div>').join('') + '</div></div></section></div>';
   } else if (step === 2) {
     const vd = V.find(x => x.id === vert), cr = C[vert], n = Object.keys(ans).length;
-    app.innerHTML = '<div class="step"><div class="page-header"><div class="container"><div><h2>' + vd.name + ' Assessment</h2><p>Answer all questions to see your readiness score</p></div><button class="btn btn-white" onclick="step=1;vert=null;ans={};render()">← BACK</button></div></div><section class="content-section"><div class="container"><div class="progress-section"><div class="progress-label"><span>Progress</span><span id="pc">' + n + ' / ' + cr.length + '</span></div><div class="progress"><div class="progress-fill" id="pf" style="width:' + (n / cr.length * 100) + '%"></div></div></div>' +
-      cr.map((c, i) => '<div class="question-card"><h3>' + (i + 1) + '. ' + c.label + '</h3><div class="radio-group"><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'g' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'g\')"><span>' + c.g + '</span></label><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'y' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'y\')"><span>' + c.y + '</span></label><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'r' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'r\')"><span>' + c.r + '</span></label></div></div>').join('') +
-      '<div class="flex justify-center mt"><button id="calc" class="btn btn-primary"' + (n === cr.length ? '' : ' disabled') + ' onclick="calc()">CALCULATE RESULTS →</button></div></div></section></div>';
+    app.innerHTML = '<div class="step"><div class="page-header"><div class="container"><div><h2>' + (isAr ? vd.nameAr : vd.name) + ' ' + t('assessment') + '</h2><p>' + t('answerAll') + '</p></div><button class="btn btn-white" onclick="step=1;vert=null;ans={};render()">' + t('back') + '</button></div></div><section class="content-section"><div class="container"><div class="progress-section"><div class="progress-label"><span>' + t('progress') + '</span><span id="pc">' + n + ' / ' + cr.length + '</span></div><div class="progress"><div class="progress-fill" id="pf" style="width:' + (n / cr.length * 100) + '%"></div></div></div>' +
+      cr.map((c, i) => '<div class="question-card"><h3>' + (i + 1) + '. ' + (isAr ? c.labelAr : c.label) + '</h3><div class="radio-group"><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'g' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'g\')"><span>' + (isAr ? c.gAr : c.g) + '</span></label><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'y' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'y\')"><span>' + (isAr ? c.yAr : c.y) + '</span></label><label class="radio"><input type="radio" name="' + c.id + '"' + (ans[c.id] === 'r' ? ' checked' : '') + ' onchange="answer(\'' + c.id + '\',\'r\')"><span>' + (isAr ? c.rAr : c.r) + '</span></label></div></div>').join('') +
+      '<div class="flex justify-center mt"><button id="calc" class="btn btn-primary"' + (n === cr.length ? '' : ' disabled') + ' onclick="calc()">' + t('calculate') + '</button></div></div></section></div>';
   } else {
     const int = I[res.tier], ss = SS[vert], plan = getPlan();
-    app.innerHTML = '<div class="step"><div class="result-hero"><div class="container"><h1>Your Readiness Results</h1><div class="donut"><canvas id="dc" width="200" height="200"></canvas><div class="donut-center"><span>' + res.tier + '</span><small>Tier</small></div></div><div class="mb"><span class="tier tier-' + res.tier.toLowerCase() + '">' + int.emoji + ' Tier ' + res.tier + ': ' + int.title + '</span></div><div class="score-legend"><div class="score-item"><div class="score-dot g"></div><span>' + res.g + ' Strong (' + res.gp + '%)</span></div><div class="score-item"><div class="score-dot y"></div><span>' + res.y + ' Moderate (' + res.yp + '%)</span></div><div class="score-item"><div class="score-dot r"></div><span>' + res.r + ' Needs Work (' + res.rp + '%)</span></div></div></div></div>' +
-      '<section class="content-section"><div class="container"><div class="interp mb"><h3>' + int.emoji + ' ' + int.sub + '</h3><h4 style="margin-top:1.25rem;color:var(--gray-dark)">What this means:</h4><ul class="points ' + (int.neg ? 'neg' : 'pos') + '">' + int.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="next-box"><h4>Recommended next steps:</h4><ul style="list-style:none;margin:.75rem 0">' + int.next.map(s => '<li style="color:var(--gray-dark);padding:.35rem 0">→ ' + s + '</li>').join('') + '</ul></div><span class="timeline">📅 ' + int.time + '</span></div>' +
-      (plan.length ? '<h2 class="mt">Your Action Plan</h2><p class="mb" style="color:var(--gray)">Focus on these areas to improve your readiness:</p><div class="grid">' + plan.map(p => '<div class="action"><h4>' + (p.pr === 'high' ? '❌' : '⚠️') + ' ' + p.label + '<span class="priority ' + p.pr + '">' + p.pr + '</span></h4><p><strong>Current:</strong> ' + p.cur + '</p><p><strong>→ Action:</strong> ' + p.a + '</p><p><strong>→ How:</strong> ' + p.h + '</p><p><strong>→ Success:</strong> ' + p.s + '</p><p><strong>→ Timeline:</strong> ' + p.t + '</p></div>').join('') + '</div>' : '') +
-      '<h2 class="mt">Success Story</h2><div class="story"><div class="company">' + ss.company + '</div><p style="color:var(--gray)">' + ss.desc + '</p><div class="signals"><span class="signal g">' + ss.sig.g + ' Strong</span><span class="signal y">' + ss.sig.y + ' Moderate</span><span class="signal r">' + ss.sig.r + ' Weak</span></div><h4 style="margin-top:1rem;color:var(--gray-dark)">What they did right:</h4><ul>' + ss.pts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="verdict">' + ss.verdict + '</div></div>' +
-      '<div class="flex justify-center gap flex-wrap mt"><button class="btn btn-primary" onclick="step=1;vert=null;ans={};res=null;render()">START OVER</button><button class="btn btn-secondary" onclick="alert(\'PDF download coming soon!\')">DOWNLOAD PDF</button></div></div></section><div class="footer">Startup Readiness Check — Self-assessment tool for accelerator programs</div></div>';
+    const intTitle = isAr ? int.titleAr : int.title;
+    const intSub = isAr ? int.subAr : int.sub;
+    const intPts = isAr ? int.ptsAr : int.pts;
+    const intNext = isAr ? int.nextAr : int.next;
+    const intTime = isAr ? int.timeAr : int.time;
+    const ssDesc = isAr ? ss.descAr : ss.desc;
+    const ssPts = isAr ? ss.ptsAr : ss.pts;
+    const ssVerdict = isAr ? ss.verdictAr : ss.verdict;
+    
+    app.innerHTML = '<div class="step"><div class="result-hero"><div class="container"><h1>' + t('results') + '</h1><div class="donut"><canvas id="dc" width="200" height="200"></canvas><div class="donut-center"><span>' + res.tier + '</span><small>' + t('tier') + '</small></div></div><div class="mb"><span class="tier tier-' + res.tier.toLowerCase() + '">' + int.emoji + ' ' + t('tier') + ' ' + res.tier + ': ' + intTitle + '</span></div><div class="score-legend"><div class="score-item"><div class="score-dot g"></div><span>' + res.g + ' ' + t('strong') + ' (' + res.gp + '%)</span></div><div class="score-item"><div class="score-dot y"></div><span>' + res.y + ' ' + t('moderate') + ' (' + res.yp + '%)</span></div><div class="score-item"><div class="score-dot r"></div><span>' + res.r + ' ' + t('needsWork') + ' (' + res.rp + '%)</span></div></div></div></div>' +
+      '<section class="content-section"><div class="container"><div class="interp mb"><h3>' + int.emoji + ' ' + intSub + '</h3><h4 style="margin-top:1.25rem;color:var(--gray-dark)">' + t('whatMeans') + '</h4><ul class="points ' + (int.neg ? 'neg' : 'pos') + '">' + intPts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="next-box"><h4>' + t('nextSteps') + '</h4><ul style="list-style:none;margin:.75rem 0">' + intNext.map(s => '<li style="color:var(--gray-dark);padding:.35rem 0">→ ' + s + '</li>').join('') + '</ul></div><span class="timeline">📅 ' + intTime + '</span></div>' +
+      (plan.length ? '<h2 class="mt">' + t('actionPlan') + '</h2><p class="mb" style="color:var(--gray)">' + t('actionDesc') + '</p><div class="grid">' + plan.map(p => '<div class="action"><h4>' + (p.pr === 'high' ? '❌' : '⚠️') + ' ' + p.label + '<span class="priority ' + p.pr + '">' + p.pr + '</span></h4><p><strong>' + t('current') + '</strong> ' + p.cur + '</p><p><strong>' + t('action') + '</strong> ' + p.a + '</p><p><strong>' + t('how') + '</strong> ' + p.h + '</p><p><strong>' + t('success') + '</strong> ' + p.s + '</p><p><strong>' + t('timeline') + '</strong> ' + p.t + '</p></div>').join('') + '</div>' : '') +
+      '<h2 class="mt">' + t('successStory') + '</h2><div class="story"><div class="company">' + ss.company + '</div><p style="color:var(--gray)">' + ssDesc + '</p><div class="signals"><span class="signal g">' + ss.sig.g + ' ' + t('strong') + '</span><span class="signal y">' + ss.sig.y + ' ' + t('moderate') + '</span><span class="signal r">' + ss.sig.r + ' ' + t('needsWork') + '</span></div><h4 style="margin-top:1rem;color:var(--gray-dark)">' + t('whatRight') + '</h4><ul>' + ssPts.map(p => '<li>' + p + '</li>').join('') + '</ul><div class="verdict">' + ssVerdict + '</div></div>' +
+      '<div class="flex justify-center gap flex-wrap mt"><button class="btn btn-primary" onclick="step=1;vert=null;ans={};res=null;render()">' + t('startOver') + '</button><button class="btn btn-secondary" onclick="alert(\'PDF download coming soon!\')">' + t('downloadPdf') + '</button></div></div></section><div class="footer">' + t('footer') + '</div></div>';
     setTimeout(drawChart, 50);
   }
 }
