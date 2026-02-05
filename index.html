@@ -32,6 +32,7 @@
       --green-light: #dcfce7;
       --yellow-light: #fef9c3;
       --red-light: #fee2e2;
+      --cream: #f8f6f3;
       --font-size-base: 16px;
     }
 
@@ -118,10 +119,11 @@
     }
     .logo-text {
       font-family: 'Poppins', sans-serif;
-      font-size: 1.75rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--primary);
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
+      white-space: nowrap;
     }
     .header-actions {
       display: flex;
@@ -136,6 +138,7 @@
       justify-content: center;
       background: transparent;
       border: 1px solid var(--gray-300);
+      border-radius: 0;
       cursor: pointer;
       transition: all .2s ease;
       font-family: 'Poppins', sans-serif;
@@ -158,14 +161,6 @@
       stroke: currentColor;
       stroke-width: 1.5;
       fill: none;
-    }
-    .header-btn.menu-btn {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: var(--white);
-    }
-    .header-btn.menu-btn:hover {
-      background: var(--primary-dark);
     }
 
     /* Accessibility Modal - Hub71 Style */
@@ -269,7 +264,7 @@
       padding: .75rem 2rem;
       background: var(--gray-700);
       border: none;
-      border-radius: 4px;
+      border-radius: 0;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
       font-size: .85rem;
@@ -340,18 +335,18 @@
     }
     .geo-shape { animation: rotateGeo 60s linear infinite; }
 
-    /* Value Proposition Bar - Hub71 Style (dark sidebar) */
+    /* Value Proposition Bar - Hub71 Style */
     .value-bar {
-      background: var(--gray-800);
+      background: var(--cream);
       padding: 3rem 2rem;
-      color: var(--white);
+      color: var(--dark);
     }
     .value-bar-title {
       font-family: 'Poppins', sans-serif;
       font-size: .75rem;
       font-weight: 600;
       margin-bottom: 2rem;
-      color: var(--white);
+      color: var(--black);
       text-transform: uppercase;
       letter-spacing: 2px;
     }
@@ -368,7 +363,7 @@
     .value-icon {
       width: 48px;
       height: 48px;
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid var(--gray-300);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -377,14 +372,14 @@
     .value-icon svg {
       width: 22px;
       height: 22px;
-      stroke: var(--white);
+      stroke: var(--primary);
       stroke-width: 1.5;
       fill: none;
     }
     .value-text {
       font-size: .9rem;
       line-height: 1.5;
-      color: rgba(255,255,255,0.85);
+      color: var(--gray-700);
     }
 
     /* Content Sections */
@@ -608,6 +603,7 @@
       font-size: .75rem;
       font-weight: 600;
       border: none;
+      border-radius: 0;
       cursor: pointer;
       transition: all .2s;
       text-transform: uppercase;
@@ -832,21 +828,22 @@
 
     /* Success Story - Hub71 Style */
     .story {
-      background: var(--gray-800);
-      border-left: none;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-left: 4px solid var(--primary);
       padding: 2.5rem;
-      color: var(--white);
+      color: var(--dark);
     }
     .story .company {
       font-family: 'Poppins', sans-serif;
       font-weight: 700;
       font-size: 1.5rem;
       font-style: italic;
-      color: var(--white);
+      color: var(--primary);
       margin-bottom: .25rem;
     }
     .story .desc {
-      color: rgba(255,255,255,0.7);
+      color: var(--gray-600);
     }
     .signals {
       display: flex;
@@ -866,7 +863,7 @@
     .story li {
       padding: .4rem 0 .4rem 1.75rem;
       position: relative;
-      color: rgba(255,255,255,0.85);
+      color: var(--gray-700);
       font-size: .95rem;
     }
     .story li::before {
@@ -876,14 +873,14 @@
       top: .85rem;
       width: 6px;
       height: 6px;
-      background: var(--accent-orange);
+      background: var(--primary);
     }
     .verdict {
       margin-top: 1.5rem;
       padding-top: 1.5rem;
-      border-top: 1px solid rgba(255,255,255,0.2);
+      border-top: 1px solid var(--gray-200);
       font-style: italic;
-      color: rgba(255,255,255,0.7);
+      color: var(--gray-600);
     }
 
     /* Page Header */
@@ -913,8 +910,8 @@
     .footer {
       text-align: center;
       padding: 3rem 2rem;
-      background: var(--black);
-      color: rgba(255,255,255,0.6);
+      background: var(--primary);
+      color: rgba(255,255,255,0.8);
       font-size: .85rem;
     }
 
@@ -963,15 +960,12 @@
 <header class="site-header">
   <div class="container">
     <a href="#" class="logo-link" onclick="step=1;vert=null;ans={};res=null;render();return false;">
-      <span class="logo-text">FRA</span>
+      <span class="logo-text">Check Your Readiness</span>
     </a>
     <div class="header-actions">
       <button class="header-btn" id="langBtn" onclick="toggleLang()" title="Arabic">AR</button>
       <button class="header-btn" id="a11yBtn" onclick="toggleA11yModal()" title="Accessibility">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M12 8v8M8 10h8M9 22l3-6 3 6"/></svg>
-      </button>
-      <button class="header-btn menu-btn" title="Menu">
-        <svg viewBox="0 0 24 24"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
       </button>
     </div>
   </div>
@@ -1687,7 +1681,7 @@ function render() {
                 </ul>
               </div>
 
-              <div class="next-box" style="background:var(--black);color:var(--white);padding:1.5rem">
+              <div class="next-box" style="background:var(--primary);color:var(--white);padding:1.5rem">
                 <h4 style="color:var(--white);margin-bottom:.75rem;font-size:.85rem;text-transform:uppercase;letter-spacing:1px">${isAr ? 'الخطوة التالية' : 'Your next step'}</h4>
                 <p style="color:var(--white);font-size:1.1rem;margin:0">${intAction}</p>
               </div>
