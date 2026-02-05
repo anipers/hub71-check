@@ -123,7 +123,7 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid var(--gray-200);
+      border-bottom: 4px solid var(--primary);
     }
     .site-header .container {
       display: flex;
@@ -138,10 +138,11 @@
     }
     .logo-text {
       font-family: var(--font-heading);
-      font-size: 1.1rem;
-      font-weight: 700;
+      font-size: 1.5rem;
+      font-weight: 800;
       color: var(--primary);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
       white-space: nowrap;
     }
     .header-actions {
@@ -322,9 +323,10 @@
     }
     .hero-subtitle {
       color: rgba(255,255,255,0.9);
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-family: var(--font-body);
-      max-width: 520px;
+      font-style: italic;
+      max-width: 600px;
       line-height: 1.8;
       margin-bottom: 3rem;
     }
@@ -465,13 +467,13 @@
     .card-icon {
       width: 56px;
       height: 56px;
-      border: 1px solid var(--gray-300);
+      border: 2px solid var(--primary-light);
       border-radius: 0;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 1.5rem;
-      transition: all .3s;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
     }
     .card-icon svg {
       width: 24px;
@@ -484,6 +486,7 @@
     .card:hover .card-icon {
       border-color: var(--primary-light);
       background: var(--primary-light);
+      transform: scale(1.05);
     }
     .card:hover .card-icon svg {
       stroke: var(--white);
@@ -624,7 +627,7 @@
     }
     .progress {
       width: 100%;
-      height: 4px;
+      height: 6px;
       background: var(--gray-200);
       border-radius: 0;
     }
@@ -756,6 +759,11 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       border-radius: 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .tier-badge:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     }
     .tier-a { background: var(--hub71-green); color: var(--white); }
     .tier-b { background: var(--yellow); color: var(--white); }
