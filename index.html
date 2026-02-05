@@ -185,21 +185,6 @@
       stroke-width: 1.5;
       fill: none;
     }
-    .header-btn.menu-btn {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: var(--white);
-    }
-    .header-btn.menu-btn:hover {
-      background: var(--primary-dark);
-    }
-    .header-btn.menu-btn svg {
-      width: 18px;
-      height: 18px;
-      stroke: var(--white);
-      stroke-width: 2;
-    }
-
     /* Accessibility Modal - Hub71 Style */
     .modal-overlay {
       position: fixed;
@@ -1039,18 +1024,12 @@
 <header class="site-header">
   <div class="container">
     <a href="#" class="logo-link" onclick="step=1;vert=null;ans={};res=null;render();return false;">
-      <span class="logo-text">HUB71</span>
+      <span class="logo-text">Check Your Readiness</span>
     </a>
     <div class="header-actions">
       <button class="header-btn" id="langBtn" onclick="toggleLang()" title="Arabic">AR</button>
-      <button class="header-btn" id="searchBtn" title="Search">
-        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </button>
       <button class="header-btn" id="a11yBtn" onclick="toggleA11yModal()" title="Accessibility">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="M12 8v8M8 10h8M9 22l3-6 3 6"/></svg>
-      </button>
-      <button class="header-btn menu-btn" id="menuBtn" title="Menu">
-        <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg>
       </button>
     </div>
   </div>
