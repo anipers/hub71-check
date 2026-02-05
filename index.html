@@ -86,14 +86,11 @@
       font-size: clamp(3rem, 8vw, 5rem);
       line-height: 1.05;
       margin-bottom: 1.5rem;
-      text-transform: lowercase;
-      font-style: italic;
     }
     h2 {
       font-size: clamp(1.75rem, 4vw, 2.75rem);
       margin-bottom: 1rem;
       color: var(--black);
-      font-style: italic;
     }
     h3 {
       font-size: 1.15rem;
@@ -123,7 +120,6 @@
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 4px solid var(--primary);
     }
     .site-header .container {
       display: flex;
@@ -318,14 +314,12 @@
       color: var(--white);
       font-family: var(--font-heading);
       font-weight: 600;
-      font-style: italic;
       font-size: clamp(3rem, 8vw, 5rem);
     }
     .hero-subtitle {
       color: rgba(255,255,255,0.9);
       font-size: 1.15rem;
       font-family: var(--font-body);
-      font-style: italic;
       max-width: 600px;
       line-height: 1.8;
       margin-bottom: 3rem;
@@ -706,7 +700,6 @@
       color: var(--white);
       font-family: var(--font-heading);
       margin-bottom: 3rem;
-      font-style: italic;
     }
 
     /* Speedometer Gauge */
@@ -902,7 +895,6 @@
       font-family: var(--font-heading);
       font-weight: 700;
       font-size: 1.5rem;
-      font-style: italic;
       color: var(--primary);
       margin-bottom: .25rem;
     }
@@ -943,7 +935,6 @@
       margin-top: 1.5rem;
       padding-top: 1.5rem;
       border-top: 1px solid var(--gray-200);
-      font-style: italic;
       color: var(--gray-600);
     }
 
@@ -1781,7 +1772,7 @@ function render() {
 
               <div style="margin:1.5rem 0">
                 <h4 style="color:var(--black);font-size:.85rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem">${isAr ? 'من أين بدأوا' : 'Where they started'}</h4>
-                <p style="color:var(--gray-700);font-style:italic">"${ssBefore}"</p>
+                <p style="color:var(--gray-700)">"${ssBefore}"</p>
               </div>
 
               <div style="margin:1.5rem 0">
